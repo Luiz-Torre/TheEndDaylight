@@ -19,7 +19,7 @@ def fase(var_global):
 
         nave = nave_geral.movimentacao(janela,nave)
 
-        vel_tiro = 400*janela.delta_time()
+        vel_tiro = 600*janela.delta_time()
         temp+= janela.delta_time()
 
         lista_tiro,temp = nave_geral.tiro(janela,nave,lista_tiro,temp,vel_tiro)

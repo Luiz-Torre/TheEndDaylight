@@ -30,11 +30,11 @@ def tiro(janela,nave_sprite,lista,temp,vel_tiro):
     teclado = Window.get_keyboard()
 
     while True:
-        if(teclado.key_pressed("SPACE") and temp > 2):
+        if(teclado.key_pressed("SPACE") and temp > 0.75):
 
             tiro  = Sprite("fase1_imagens/shot.png",5)
-            tiro.set_position(nave_sprite.x+40, nave_sprite.y+30)
-            tiro.set_total_duration(3000)
+            tiro.set_position(nave_sprite.x, nave_sprite.y-115)
+            tiro.set_total_duration(2000)
             lista.append(tiro)
             temp = 0
 
