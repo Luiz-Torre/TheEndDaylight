@@ -29,4 +29,4 @@ while True:
     
     elif var_global == 5:
         var_global = tela_tutorial3.tutorial(var_global) 
-
+ 
