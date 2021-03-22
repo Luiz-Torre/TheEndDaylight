@@ -18,6 +18,7 @@ def fase(var_global):
     temp = 0
     temp_tiro = 0
     temp_asteroide = 0
+    vida = 3
     while True:
         fundo.draw()  
         nave.draw() 
@@ -32,9 +33,16 @@ def fase(var_global):
         lista_obstaculos,temp_asteroide = obstaculos_fase1.asteroide(janela,temp_asteroide,lista_obstaculos)
 
 
-        lista_tiro, lista_obstaculos = colisoes_fase1.tiro_asteroide(lista_tiro, lista_obstaculos)
+        lista_tiro, lista_obstaculos= colisoes_fase1.tiro_asteroide(lista_tiro, lista_obstaculos)
+
+        lista_obstaculos,vida = colisoes_fase1.nave_asteroide(nave, lista_obstaculos,vida)
        
         if(teclado.key_pressed("ESC")):
+            var_global = 0
+            return var_global
+
+
+        if vida == 0:
             var_global = 0
             return var_global
 

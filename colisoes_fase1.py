@@ -15,3 +15,15 @@ def tiro_asteroide(lista_tiro, lista_obstaculos):
 
 
         return lista_tiro, lista_obstaculos
+
+
+def nave_asteroide(nave, lista_obstaculos,vida):
+
+    while True:
+        if lista_obstaculos != []:
+            for A in lista_obstaculos:
+                    if Collision.collided_perfect(A,nave):
+                        lista_obstaculos.pop(lista_obstaculos.index(A))
+                        vida = 0
+
+        return lista_obstaculos, vida
