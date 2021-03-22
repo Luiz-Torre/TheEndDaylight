@@ -20,10 +20,10 @@ while True:
 
     elif var_global == 2:
         var_global = tela_gameover.morreu(var_global)
-    
+
     elif var_global == 3:
         var_global = tela_tutorial1.tutorial(var_global)       
-    
+
     elif var_global == 4:
         var_global = tela_tutorial2.tutorial(var_global) 
     
