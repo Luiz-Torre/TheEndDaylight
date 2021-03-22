@@ -8,7 +8,10 @@ import colisoes_fase1
 
 def fase(var_global):
     janela = Window(1280,768)
-    fundo= GameImage("fase1_imagens/fundo.png") 
+    fundo= Sprite("fase1_imagens/fundo.png")
+    fundo.set_position(0,0)
+    fundo2= Sprite("fase1_imagens/fundo.png")
+    fundo2.set_position(1280,0)
     janela.set_title("Fase 1 - The End Daylight")
     nave = Sprite("fase1_imagens/nave_sprite.png")
     lista_obstaculos = []
@@ -20,8 +23,33 @@ def fase(var_global):
     temp_asteroide = 0
     vida = 3
     while True:
-        fundo.draw()  
+      
+        vel_fundo = 0.2
+
+
+        if  fundo.x+fundo.width>=0:
+            fundo.move_x(-vel_fundo)  
+
+
+        else:
+            fundo.set_position(1280,0)
+
+        if  fundo2.x+fundo2.width>=0:
+            fundo2.move_x(-vel_fundo)  
+
+
+        else:
+            fundo2.set_position(1280,0)
+
+
+        fundo.draw()
+        fundo2.draw()
+       
+
         nave.draw() 
+
+
+
         nave = nave_geral.movimentacao(janela,nave)
 
         vel_tiro = 600*janela.delta_time()
