@@ -5,7 +5,7 @@ import fase2
 import fase3
 import tela_gameover
 import tela_tutorial1
-import tela_tutorial2
+import tela_tutorial2 
 import tela_tutorial3
 
 

@@ -20,16 +20,35 @@ def fase(var_global):
 
     nave = Sprite("images/fase1/ship.gif")
     nave.set_position(50,janela.height/2)
-
-    lista_obstaculos = []
+    cont = 0
+    fps = 0
+    fps_atual = 0
+    lista_satelite_on = []
+    lista_satelite_off = []
+    lista_asteroide = []
     lista_tiro = []
+    vida_list = []
+    vida = 4
+    pontos = 0
+    for vida_num in range(0,vida):
+                vida_img = Sprite("images/fase1/vida.png")
+                vida_img.set_position(vida_num*60,20)
+                vida_list.append(vida_img)
 
     #variáveis
-    temp, temp_tiro, temp_asteroide, temp_satelite = 0, 0, 0, 0
-    vida = 3
+    temp_tiro, temp_asteroide, temp_satelite_off,temp_satelite_on = 0, 0, 0, 0
+    vida = 4
 
     while True:
-      
+        ####FrameRate
+        cont += janela.delta_time()
+        fps+=1
+        if cont>1:
+            fps_atual = fps
+            cont=0
+            fps=0
+
+
         vel_fundo = 0.2
 
 
@@ -57,18 +76,27 @@ def fase(var_global):
         vel_tiro = 600*janela.delta_time()
         temp_tiro += janela.delta_time()
         temp_asteroide += janela.delta_time()
-        temp_satelite += janela.delta_time()
+        temp_satelite_on += janela.delta_time()
+        temp_satelite_off += janela.delta_time()
+
 
         lista_tiro,temp_tiro = nave_geral.tiro(janela,nave,lista_tiro,temp_tiro,vel_tiro)
 
-        lista_obstaculos,temp_asteroide = obstaculos_fase1.asteroide(janela,temp_asteroide,lista_obstaculos)
-        lista_obstaculos,temp_satelite = obstaculos_fase1.satelites(janela,temp_satelite,lista_obstaculos)
+        lista_asteroide,temp_asteroide = obstaculos_fase1.asteroide(janela,temp_asteroide,lista_asteroide)
+        lista_satelite_on,temp_satelite_on,lista_tiro = obstaculos_fase1.satelites_on(janela,temp_satelite_on,lista_satelite_on,lista_tiro)
+        lista_satelite_off,temp_satelite_off,lista_tiro = obstaculos_fase1.satelites_off(janela,temp_satelite_off,lista_satelite_off,lista_tiro)
 
 
-        lista_tiro, lista_obstaculos= colisoes_fase1.tiro_obstaculo(lista_tiro, lista_obstaculos)
+        lista_tiro, lista_asteroide= colisoes_fase1.tiro_obstaculo(lista_tiro, lista_asteroide)
+        lista_satelite_on,lista_tiro,vida= colisoes_fase1.tiro_satelite_on(lista_tiro, lista_satelite_on,vida)
+        lista_satelite_off,lista_tiro,pontos= colisoes_fase1.tiro_satelite_off(lista_tiro, lista_satelite_off,pontos)
 
-        lista_obstaculos, vida = colisoes_fase1.nave_asteroide(nave, lista_obstaculos,vida)
+        lista_asteroide, vida = colisoes_fase1.nave_asteroide(nave, lista_asteroide,vida)
        
+        for vida_for in range(vida-1):
+            vida_list[vida_for].draw()
+
+
         if(teclado.key_pressed("ESC")):
             var_global = 0
             return var_global
@@ -78,4 +106,8 @@ def fase(var_global):
             var_global = 0
             return var_global
 
+
+        janela.draw_text(f"Pontos: {int(pontos)}", 400, 20, size=60, color=(240,240,240), font_name="Times New Roman", bold=True, italic=False)
+
+        janela.draw_text(f"Fps: {fps_atual}", 800, 20, size=30, color=(240,240,240), font_name="Times New Roman", bold=True, italic=False)
         janela.update()
