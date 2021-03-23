@@ -1,6 +1,6 @@
 from PPlay.collision import *
 
-def tiro_asteroide(lista_tiro, lista_obstaculos):
+def tiro_obstaculo(lista_tiro, lista_obstaculos):
 
     while True:
         

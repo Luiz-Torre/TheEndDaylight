@@ -6,11 +6,11 @@ from PPlay.gameimage import *
 def menu_inicial(var_global):
     janela = Window(1280,768)
     janela.set_title("The End Daylight")
-    fundo_menu = GameImage("menu_imagens/fundo.png")
+    fundo_menu = GameImage("images/menu/fundo.png")
 
-    btn_jogar = GameImage("menu_imagens/START.png")
-    btn_comandos = GameImage("menu_imagens/comandos.png")
-    btn_creditos = GameImage("menu_imagens/creditos.png")
+    btn_jogar = GameImage("images/menu/start.png")
+    btn_comandos = GameImage("images/menu/comandos.png")
+    btn_creditos = GameImage("images/menu/creditos.png")
 
 
     btn_jogar.set_position((janela.width)/2 - (btn_jogar.width)/2, janela.height -btn_comandos.height+55)
@@ -20,7 +20,7 @@ def menu_inicial(var_global):
 
     mouse = Window.get_mouse()
 
-        #Game Loop
+    #Game Loop
     while True:
         fundo_menu.draw()
         btn_jogar.draw()

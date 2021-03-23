@@ -5,13 +5,17 @@ from PPlay.gameimage import *
 def tutorial(var_global):
     janela = Window(1280,768)
     janela.set_title("Tutorial Fase 1")
-    fundo_gameover = GameImage("tela_tutorial_imagens/tutorial_fase1.png")
-    btn_proximo = GameImage("tela_tutorial_imagens/proximo.png")
+
+    fundo_gameover = GameImage("images/tela_tutorial/tutorial_fase1.png")
+
+    btn_proximo = GameImage("images/tela_tutorial/proximo.png")
     btn_proximo.set_position(800,630)
 
-    btn_voltar = GameImage("tela_tutorial_imagens/voltar_menu.png")
+    btn_voltar = GameImage("images/tela_tutorial/voltar_menu.png")
     btn_voltar.set_position(100,630)
+
     mouse = Window.get_mouse()
+
     while True:
         fundo_gameover.draw()
         btn_proximo.draw()

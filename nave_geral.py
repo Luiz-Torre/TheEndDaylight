@@ -1,5 +1,7 @@
 from PPlay.window import *
 from PPlay.sprite import *
+
+
 def movimentacao(janela,nave_sprite):
     teclado = Window.get_keyboard()
 
@@ -35,7 +37,7 @@ def tiro(janela,nave_sprite,lista,temp,vel_tiro):
 
         if(teclado.key_pressed("SPACE") and temp > 0.5):
 
-            tiro  = Sprite("fase1_imagens/shot.png",5)
+            tiro  = Sprite("images/fase1/shot.png",5)
             tiro.set_position(nave_sprite.x, nave_sprite.y-37)
             tiro.set_total_duration(2000)
             lista.append(tiro)
