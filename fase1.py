@@ -107,7 +107,7 @@ def fase(var_global):
             return var_global
 
 
-        janela.draw_text(f"Pontos: {int(pontos)}", 400, 20, size=60, color=(240,240,240), font_name="Times New Roman", bold=True, italic=False)
+        janela.draw_text(f"Pontos: {int(pontos)}", 400, 20, size=45, color=(240,240,240), font_name="Times New Roman", bold=True, italic=False)
 
         janela.draw_text(f"Fps: {fps_atual}", 800, 20, size=30, color=(240,240,240), font_name="Times New Roman", bold=True, italic=False)
         janela.update()

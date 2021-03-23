@@ -4,7 +4,7 @@ from PPlay.gameimage import *
 
 def tutorial(var_global):
     janela = Window(1280,768)
-    janela.set_title("Tutorial Fase 1")
+    janela.set_title("Tutorial Fase 2")
 
     fundo_gameover = GameImage("images/tela_tutorial/tutorial_fase2.png")
 
