@@ -4,10 +4,10 @@ from random import randint
 
 
 def asteroide(janela,time,lista_asteroide):
-
+    
     if time > randint(1,3):
 
-        asteroide = Sprite("images/fase1/asteroide.png")
+        asteroide = Sprite(f"images/fase1/asteroide{randint(1,3)}.png")
         asteroide.set_position(1281,randint(0 + asteroide.height,768- asteroide.height))
         lista_asteroide.append(asteroide)
         time = 0

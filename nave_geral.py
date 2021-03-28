@@ -18,7 +18,7 @@ def movimentacao(janela,nave_sprite):
                     nave_sprite.move_x(-vel_nave)
         
         if(teclado.key_pressed("UP")):
-            if nave_sprite.y > 0:
+            if nave_sprite.y > 70:
                 nave_sprite.move_y(-vel_nave)
 
         if(teclado.key_pressed("DOWN")):  
