@@ -8,8 +8,8 @@ import tela_tutorial1
 import tela_tutorial2 
 import tela_tutorial3
 
-
-var_global = 0 #Responsavel por fazer as trocas de tela
+# Responsavel por fazer as trocas de tela
+var_global = 0 
 
 while True:
     if var_global == 0:

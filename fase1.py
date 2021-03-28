@@ -9,7 +9,7 @@ import colisoes_fase1
 
 def fase(var_global):
     janela = Window(1280,768)
-    janela.set_title("Fase 1 - The End Daylight")
+    janela.set_title("Fase 1 - The End of Daylight")
     teclado = Window.get_keyboard()
 
     fundo= Sprite("images/fase1/fundo.png")
@@ -20,44 +20,39 @@ def fase(var_global):
 
     nave = Sprite("images/fase1/ship.gif")
     nave.set_position(50,janela.height/2)
-    cont,fps = 0, 0
-    fps_atual = 0
-    lista_satelite_on = []
-    lista_satelite_off = []
-    lista_asteroide = []
-    lista_tiro = []
+    
+    pontos_text = GameImage("images/pontos.png")
+    pontos_text.set_position(500,-5)
+    #myfont = pygame.font.SysFont("Computer_says_no.ttf",25) 
+    
     vida_list = []
-    vida = 4
-    pontos = 0
-    for vida_num in range(1,vida):
+    for vida_num in range(1,4):
         vida_img = Sprite("images/fase1/vida.png")
         vida_img.set_position(vida_num*50,20)
         vida_list.append(vida_img)
 
     #variáveis
+    cont,fps, fps_atual, pontos = 0, 0, 0, 0
+    lista_satelite_on, lista_satelite_off,lista_asteroide, lista_tiro = [], [], [], []
     temp_tiro, temp_asteroide, temp_satelite_off,temp_satelite_on = 0, 0, 0, 0
-    vida = 4
+    vida = 3
 
     while True:
-        ####FrameRate
+        #### FrameRate
         cont += janela.delta_time()
-        fps+=1
-        if cont>1:
+        fps += 1
+        if cont > 1:
             fps_atual = fps
-            cont=0
-            fps=0
-
-
+            cont, fps = 0, 0
+        
+        ### Fundo
         vel_fundo = 0.2
-
-
-        if  fundo.x+fundo.width>=0:
+        if  fundo.x+fundo.width >= 0:
             fundo.move_x(-vel_fundo)  
         else:
             fundo.set_position(1280,0)
 
-        
-        if  fundo2.x+fundo2.width>=0:
+        if  fundo2.x+fundo2.width >= 0:
             fundo2.move_x(-vel_fundo)  
         else:
             fundo2.set_position(1280,0)
@@ -66,12 +61,11 @@ def fase(var_global):
         fundo.draw()
         fundo2.draw()
        
+        ### Nave
         nave.draw() 
-
-
-
         nave = nave_geral.movimentacao(janela,nave)
 
+        ### Interações
         vel_tiro = 600*janela.delta_time()
         temp_tiro += janela.delta_time()
         temp_asteroide += janela.delta_time()
@@ -92,7 +86,7 @@ def fase(var_global):
 
         lista_asteroide, vida = colisoes_fase1.nave_asteroide(nave, lista_asteroide,vida)
        
-        for vida_for in range(vida-1):
+        for vida_for in range(vida):
             vida_list[vida_for].draw()
 
 
@@ -105,8 +99,8 @@ def fase(var_global):
             var_global = 0
             return var_global
 
-
-        janela.draw_text(f"Pontos: {int(pontos)}", 400, 20, size=45, color=(240,240,240), font_name="Times New Roman", bold=True, italic=False)
-
-        janela.draw_text(f"Fps: {fps_atual}", 800, 20, size=30, color=(240,240,240), font_name="Times New Roman", bold=True, italic=False)
+        pontos_text.draw()
+        janela.draw_text(f"{int(pontos)}", 700, 20, size=40, color=(240,240,240), font_name="Times New Roman")
+        janela.draw_text(f"Fps: {fps_atual}", 850, 20, size=30, color=(240,240,240), font_name="Times New Roman", italic=True)
+        
         janela.update()

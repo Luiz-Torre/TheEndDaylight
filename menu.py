@@ -5,7 +5,7 @@ from PPlay.gameimage import *
 
 def menu_inicial(var_global):
     janela = Window(1280,768)
-    janela.set_title("The End Daylight")
+    janela.set_title("The End of Daylight")
     fundo_menu = GameImage("images/menu/fundo.png")
 
     btn_jogar = GameImage("images/menu/start.png")

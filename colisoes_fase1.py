@@ -35,7 +35,7 @@ def tiro_satelite_off(lista_tiros, lista_satelite_off,pontos):
                     if B.y > A.y- A.height and B.y < A.y and B.x >= A.x-A.width/2:
                         lista_satelite_off.pop(lista_satelite_off.index(A))
                         lista_tiros.pop(lista_tiros.index(B))
-                        pontos += 1250
+                        pontos += 100
     return lista_satelite_off,lista_tiros,pontos
 
 def nave_asteroide(nave, lista_asteroide,vida):
