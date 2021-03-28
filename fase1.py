@@ -20,8 +20,7 @@ def fase(var_global):
 
     nave = Sprite("images/fase1/ship.gif")
     nave.set_position(50,janela.height/2)
-    cont = 0
-    fps = 0
+    cont,fps = 0, 0
     fps_atual = 0
     lista_satelite_on = []
     lista_satelite_off = []
@@ -30,10 +29,10 @@ def fase(var_global):
     vida_list = []
     vida = 4
     pontos = 0
-    for vida_num in range(0,vida):
-                vida_img = Sprite("images/fase1/vida.png")
-                vida_img.set_position(vida_num*60,20)
-                vida_list.append(vida_img)
+    for vida_num in range(1,vida):
+        vida_img = Sprite("images/fase1/vida.png")
+        vida_img.set_position(vida_num*50,20)
+        vida_list.append(vida_img)
 
     #variáveis
     temp_tiro, temp_asteroide, temp_satelite_off,temp_satelite_on = 0, 0, 0, 0
