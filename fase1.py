@@ -24,6 +24,9 @@ def fase(var_global):
     pontos_text = GameImage("images/pontos.png")
     pontos_text.set_position(500,-5)
     #myfont = pygame.font.SysFont("Computer_says_no.ttf",25) 
+
+    btn_pausa = GameImage("images/pause.png")
+    btn_pausa.set_position(1200,20)
     
     vida_list = []
     for vida_num in range(1,4):
@@ -99,8 +102,10 @@ def fase(var_global):
             var_global = 0
             return var_global
 
+        ### Topo da tela
+        btn_pausa.draw()
         pontos_text.draw()
         janela.draw_text(f"{int(pontos)}", 700, 20, size=40, color=(240,240,240), font_name="Times New Roman")
-        janela.draw_text(f"Fps: {fps_atual}", 850, 20, size=30, color=(240,240,240), font_name="Times New Roman", italic=True)
+        janela.draw_text(f"Fps: {fps_atual}", 850, 25, size=30, color=(240,240,240), font_name="Times New Roman", italic=True)
         
         janela.update()
