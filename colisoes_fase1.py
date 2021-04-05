@@ -43,8 +43,30 @@ def nave_asteroide(nave, lista_asteroide,vida):
     while True:
         if lista_asteroide != []:
             for A in lista_asteroide:
-                    if Collision.collided_perfect(A,nave):
-                        lista_asteroide.pop(lista_asteroide.index(A))
-                        vida -= 1
+                if Collision.collided_perfect(A,nave):
+                    lista_asteroide.pop(lista_asteroide.index(A))
+                    vida -= 1
 
         return lista_asteroide, vida
+
+def nave_satelite_on(nave, lista_satelite_on,vida):
+
+    while True:
+        if lista_satelite_on != []:
+            for A in lista_satelite_on:
+                if Collision.collided_perfect(A,nave):
+                    lista_satelite_on.pop(lista_satelite_on.index(A))
+                    vida -= 1
+
+        return lista_satelite_on, vida
+
+def nave_satelite_off(nave, lista_satelite_off,vida):
+
+    while True:
+        if lista_satelite_off != []:
+            for A in lista_satelite_off:
+                if Collision.collided_perfect(A,nave):
+                    lista_satelite_off.pop(lista_satelite_off.index(A))
+                    vida -= 1
+
+        return lista_satelite_off, vida

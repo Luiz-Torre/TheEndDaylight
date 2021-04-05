@@ -52,82 +52,86 @@ def fase(var_global):
     vida = 4
 
     while True:
-        ####FrameRate
+        ## FrameRate
         cont += janela.delta_time()
-        fps+=1
-        if cont>1:
+        fps += 1
+        if cont > 1:
             fps_atual = fps
-            cont=0
-            fps=0
+            cont,fps = 0, 0
 
-
+        ## Deslocamento de fundo
         vel_fundo = 0.2
-
 
         if  fundo.x+fundo.width>=0:
             fundo.move_x(-vel_fundo)  
         else:
             fundo.set_position(1280,0)
 
-        
         if  fundo2.x+fundo2.width>=0:
             fundo2.move_x(-vel_fundo)  
         else:
             fundo2.set_position(1280,0)
-
-
+        
+        ## Desenhando tela do jogo
         fundo.draw()
         fundo2.draw()
         pause_icon.draw()
+        janela.draw_text(f"Pontos: {int(pontos)}", 400, 20, size=45, color=(240,240,240), font_name="Computer_says_no")
+        janela.draw_text(f"Fps: {fps_atual}", 800, 20, size=30, color=(240,240,240), font_name="Computer_says_no", italic=True)
         nave.draw() 
 
+        ## Pausa
+        if mouse.is_over_object(pause_icon) and mouse.is_button_pressed(1): 
+            var = 0
 
-
+        ## Movimentação
         nave = nave_geral.movimentacao(janela,nave)
 
+        ## Velocidade do tiro
         vel_tiro = 600*janela.delta_time()
+
+        ## Variáveis de tempo
         temp_tiro += janela.delta_time()
         temp_asteroide += janela.delta_time()
         temp_satelite_on += janela.delta_time()
         temp_satelite_off += janela.delta_time()
 
 
-        if mouse.is_over_object(pause_icon) and mouse.is_button_pressed(1): 
-                var = 0
-
-
+        ## Setando tiros na tela
         lista_tiro,temp_tiro = nave_geral.tiro(janela,nave,lista_tiro,temp_tiro,vel_tiro)
 
+        ## Setando obstáculos na tela
         lista_asteroide,temp_asteroide = obstaculos_fase1.asteroide(janela,temp_asteroide,lista_asteroide)
         lista_satelite_on,temp_satelite_on,lista_tiro = obstaculos_fase1.satelites_on(janela,temp_satelite_on,lista_satelite_on,lista_tiro)
         lista_satelite_off,temp_satelite_off,lista_tiro = obstaculos_fase1.satelites_off(janela,temp_satelite_off,lista_satelite_off,lista_tiro)
 
+        ## Colisões por tiros
+        lista_tiro, lista_asteroide = colisoes_fase1.tiro_obstaculo(lista_tiro, lista_asteroide)
+        lista_satelite_on,lista_tiro,vida = colisoes_fase1.tiro_satelite_on(lista_tiro, lista_satelite_on,vida)
+        lista_satelite_off,lista_tiro,pontos = colisoes_fase1.tiro_satelite_off(lista_tiro, lista_satelite_off,pontos)
 
-        lista_tiro, lista_asteroide= colisoes_fase1.tiro_obstaculo(lista_tiro, lista_asteroide)
-        lista_satelite_on,lista_tiro,vida= colisoes_fase1.tiro_satelite_on(lista_tiro, lista_satelite_on,vida)
-        lista_satelite_off,lista_tiro,pontos= colisoes_fase1.tiro_satelite_off(lista_tiro, lista_satelite_off,pontos)
-
+        ## Colisões com obstáculos
         lista_asteroide, vida = colisoes_fase1.nave_asteroide(nave, lista_asteroide,vida)
+        lista_satelite_on, vida = colisoes_fase1.nave_satelite_on(nave, lista_satelite_on,vida)
+        lista_satelite_off, vida = colisoes_fase1.nave_satelite_off(nave, lista_satelite_off,vida)
        
+        ## Desenhando vida
         for vida_for in range(vida-1):
             vida_list[vida_for].draw()
 
-
+        ## Voltando para o menu
         if(teclado.key_pressed("ESC")):
             var_global = 0
             return var_global
-
 
         if vida == 0:
             var_global = 0
             return var_global
 
 
-        janela.draw_text(f"Pontos: {int(pontos)}", 400, 20, size=45, color=(240,240,240), font_name="Times New Roman", bold=True, italic=False)
-
-        janela.draw_text(f"Fps: {fps_atual}", 800, 20, size=30, color=(240,240,240), font_name="Times New Roman", bold=True, italic=False)
         janela.update()
 
+        ## TELA DE PAUSE
         while var == 0:
                 
             fundo.draw()
@@ -137,13 +141,14 @@ def fase(var_global):
             continuar_pause.draw()
             sair_pause.draw()
             janela.update()
+            
+            if mouse.is_button_pressed(1):
+                if mouse.is_over_object(continuar_pause): 
+                    var = 1
 
-            if mouse.is_over_object(continuar_pause) and mouse.is_button_pressed(1): 
-                var = 1
-
-            if mouse.is_over_object(sair_pause) and mouse.is_button_pressed(1):
-                var_global = 0
-                return var_global
+                if mouse.is_over_object(sair_pause):
+                    var_global = 0
+                    return var_global
 
 
             
