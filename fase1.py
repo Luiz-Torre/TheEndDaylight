@@ -30,11 +30,11 @@ def fase(var_global):
 
     som_on_pause = Sprite("images/tela_geral/som_on.png")
     som_off_pause = Sprite("images/tela_geral/som_off.png")
-    som_on_pause.set_position(400,300), som_off_pause.set_position(400,200)
+    som_on_pause.set_position(500,330), som_off_pause.set_position(500,330)
 
     music_on_pause = Sprite("images/tela_geral/music_on.png")
     music_off_pause = Sprite("images/tela_geral/music_off.png")
-    music_on_pause.set_position(600,300), music_off_pause.set_position(700,200)
+    music_on_pause.set_position(680,330), music_off_pause.set_position(680,330)
 
     continuar_pause = Sprite("images/pause/continuar.png")
     continuar_pause.set_position(500,400)
@@ -92,7 +92,7 @@ def fase(var_global):
         nave.draw() 
 
         ## Pausa
-        if mouse.is_over_object(pause_icon) and mouse.is_button_pressed(1): 
+        if mouse.is_button_pressed(1) and mouse.is_over_object(pause_icon): 
             var = 0
 
         ## Movimentação
@@ -135,8 +135,9 @@ def fase(var_global):
             var_global = 0
             return var_global
 
+        ## Gameover
         if vida == 0:
-            var_global = 0
+            var_global = 2
             return var_global
 
 
@@ -151,10 +152,11 @@ def fase(var_global):
             fundo_pause.draw()
             continuar_pause.draw()
             sair_pause.draw()
-            janela.update()
-            
             music_on_pause.draw()
             som_on_pause.draw()
+
+            janela.update()
+            
             if mouse.is_button_pressed(1):
                 if mouse.is_over_object(continuar_pause): 
                     var = 1

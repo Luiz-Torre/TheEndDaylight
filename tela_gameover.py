@@ -10,7 +10,7 @@ def morreu(var_global):
     fundo_gameover = GameImage("images/gameover/fundo_perdeu.png")
     
     btn_tryagain = GameImage("images/gameover/button_tentenovamente.png")
-    btn_tryagain.set_position(400,470)
+    btn_tryagain.set_position(400,500)
     
     teclado = Window.get_keyboard()
     mouse = Window.get_mouse()
@@ -19,8 +19,8 @@ def morreu(var_global):
         fundo_gameover.draw()
         btn_tryagain.draw()
 
-        if mouse.is_over_object(btn_tryagain) and mouse.is_button_pressed(1): 
-            var_global = 0
+        if mouse.is_button_pressed(1) and mouse.is_over_object(btn_tryagain): 
+            var_global = 1
             return var_global
 
 
