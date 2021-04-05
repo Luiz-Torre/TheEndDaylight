@@ -8,40 +8,51 @@ import colisoes_fase1
 
 
 def fase(var_global):
+
     janela = Window(1280,768)
     janela.set_title("Fase 1 - The End Daylight")
     teclado = Window.get_keyboard()
+    mouse = Window.get_mouse()
 
-    fundo= Sprite("images/fase1/fundo.png")
+    fundo = Sprite("images/fase1/fundo.png")
     fundo.set_position(0,0)
 
     fundo2= Sprite("images/fase1/fundo.png")
     fundo2.set_position(1280,0)
 
-    nave = Sprite("images/fase1/ship.gif")
-    fundo_pause = Sprite("images/pause/pause.png")
-    continuar_pause = Sprite("images/pause/continuar.png")
-    continuar_pause.set_position(500,300)
-
     pause_icon = Sprite("images/pause/pause_icon.png")
     pause_icon.set_position(1280-pause_icon.width-30,10)
 
+    nave = Sprite("images/fase1/ship.gif")
+
+    ## TELA DE PAUSA
+    fundo_pause = Sprite("images/pause/pause.png")
+
+    som_on_pause = Sprite("images/tela_geral/som_on.png")
+    som_off_pause = Sprite("images/tela_geral/som_off.png")
+    som_on_pause.set_position(400,300), som_off_pause.set_position(400,200)
+
+    music_on_pause = Sprite("images/tela_geral/music_on.png")
+    music_off_pause = Sprite("images/tela_geral/music_off.png")
+    music_on_pause.set_position(600,300), music_off_pause.set_position(700,200)
+
+    continuar_pause = Sprite("images/pause/continuar.png")
+    continuar_pause.set_position(500,400)
+
     sair_pause = Sprite("images/pause/sair.png")
-    sair_pause.set_position(500,400)
+    sair_pause.set_position(500,500)
 
-    mouse = Window.get_mouse()
 
-    var = 1
+    ## Variáveis
     nave.set_position(50,janela.height/2)
-    cont,fps = 0, 0
-    fps_atual = 0
+    cont,fps, fps_atual = 0, 0, 0
     lista_satelite_on = []
     lista_satelite_off = []
     lista_asteroide = []
     lista_tiro = []
     vida_list = []
-    vida = 4
-    pontos = 0
+    var, vida, pontos = 1, 4, 0
+
     for vida_num in range(1,vida):
         vida_img = Sprite("images/fase1/vida.png")
         vida_img.set_position(vida_num*50,20)
@@ -142,6 +153,8 @@ def fase(var_global):
             sair_pause.draw()
             janela.update()
             
+            music_on_pause.draw()
+            som_on_pause.draw()
             if mouse.is_button_pressed(1):
                 if mouse.is_over_object(continuar_pause): 
                     var = 1
