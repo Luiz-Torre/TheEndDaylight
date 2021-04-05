@@ -9,7 +9,7 @@ import colisoes_fase1
 
 def fase(var_global):
     janela = Window(1280,768)
-    janela.set_title("Fase 1 - The End of Daylight")
+    janela.set_title("Fase 1 - The End Daylight")
     teclado = Window.get_keyboard()
 
     fundo= Sprite("images/fase1/fundo.png")
@@ -19,43 +19,58 @@ def fase(var_global):
     fundo2.set_position(1280,0)
 
     nave = Sprite("images/fase1/ship.gif")
-    nave.set_position(50,janela.height/2)
-    
-    pontos_text = GameImage("images/pontos.png")
-    pontos_text.set_position(500,-5)
-    #myfont = pygame.font.SysFont("Computer_says_no.ttf",25) 
+    fundo_pause = Sprite("images/pause/pause.png")
+    continuar_pause = Sprite("images/pause/continuar.png")
+    continuar_pause.set_position(500,300)
 
-    btn_pausa = GameImage("images/pause.png")
-    btn_pausa.set_position(1200,20)
-    
+    pause_icon = Sprite("images/pause/pause_icon.png")
+    pause_icon.set_position(1280-pause_icon.width-30,10)
+
+    sair_pause = Sprite("images/pause/sair.png")
+    sair_pause.set_position(500,400)
+
+    mouse = Window.get_mouse()
+
+    var = 1
+    nave.set_position(50,janela.height/2)
+    cont,fps = 0, 0
+    fps_atual = 0
+    lista_satelite_on = []
+    lista_satelite_off = []
+    lista_asteroide = []
+    lista_tiro = []
     vida_list = []
-    for vida_num in range(1,4):
+    vida = 4
+    pontos = 0
+    for vida_num in range(1,vida):
         vida_img = Sprite("images/fase1/vida.png")
         vida_img.set_position(vida_num*50,20)
         vida_list.append(vida_img)
 
     #variáveis
-    cont,fps, fps_atual, pontos = 0, 0, 0, 0
-    lista_satelite_on, lista_satelite_off,lista_asteroide, lista_tiro = [], [], [], []
     temp_tiro, temp_asteroide, temp_satelite_off,temp_satelite_on = 0, 0, 0, 0
-    vida = 3
+    vida = 4
 
     while True:
-        #### FrameRate
+        ####FrameRate
         cont += janela.delta_time()
-        fps += 1
-        if cont > 1:
+        fps+=1
+        if cont>1:
             fps_atual = fps
-            cont, fps = 0, 0
-        
-        ### Fundo
+            cont=0
+            fps=0
+
+
         vel_fundo = 0.2
-        if  fundo.x+fundo.width >= 0:
+
+
+        if  fundo.x+fundo.width>=0:
             fundo.move_x(-vel_fundo)  
         else:
             fundo.set_position(1280,0)
 
-        if  fundo2.x+fundo2.width >= 0:
+        
+        if  fundo2.x+fundo2.width>=0:
             fundo2.move_x(-vel_fundo)  
         else:
             fundo2.set_position(1280,0)
@@ -63,17 +78,22 @@ def fase(var_global):
 
         fundo.draw()
         fundo2.draw()
-       
-        ### Nave
+        pause_icon.draw()
         nave.draw() 
+
+
+
         nave = nave_geral.movimentacao(janela,nave)
 
-        ### Interações
         vel_tiro = 600*janela.delta_time()
         temp_tiro += janela.delta_time()
         temp_asteroide += janela.delta_time()
         temp_satelite_on += janela.delta_time()
         temp_satelite_off += janela.delta_time()
+
+
+        if mouse.is_over_object(pause_icon) and mouse.is_button_pressed(1): 
+                var = 0
 
 
         lista_tiro,temp_tiro = nave_geral.tiro(janela,nave,lista_tiro,temp_tiro,vel_tiro)
@@ -89,7 +109,7 @@ def fase(var_global):
 
         lista_asteroide, vida = colisoes_fase1.nave_asteroide(nave, lista_asteroide,vida)
        
-        for vida_for in range(vida):
+        for vida_for in range(vida-1):
             vida_list[vida_for].draw()
 
 
@@ -102,10 +122,29 @@ def fase(var_global):
             var_global = 0
             return var_global
 
-        ### Topo da tela
-        btn_pausa.draw()
-        pontos_text.draw()
-        janela.draw_text(f"{int(pontos)}", 700, 20, size=40, color=(240,240,240), font_name="Times New Roman")
-        janela.draw_text(f"Fps: {fps_atual}", 850, 25, size=30, color=(240,240,240), font_name="Times New Roman", italic=True)
-        
+
+        janela.draw_text(f"Pontos: {int(pontos)}", 400, 20, size=45, color=(240,240,240), font_name="Times New Roman", bold=True, italic=False)
+
+        janela.draw_text(f"Fps: {fps_atual}", 800, 20, size=30, color=(240,240,240), font_name="Times New Roman", bold=True, italic=False)
         janela.update()
+
+        while var == 0:
+                
+            fundo.draw()
+            fundo2.draw()
+            nave.draw()
+            fundo_pause.draw()
+            continuar_pause.draw()
+            sair_pause.draw()
+            janela.update()
+
+            if mouse.is_over_object(continuar_pause) and mouse.is_button_pressed(1): 
+                var = 1
+
+            if mouse.is_over_object(sair_pause) and mouse.is_button_pressed(1):
+                var_global = 0
+                return var_global
+
+
+            
+

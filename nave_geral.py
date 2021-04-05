@@ -18,7 +18,7 @@ def movimentacao(janela,nave_sprite):
                     nave_sprite.move_x(-vel_nave)
         
         if(teclado.key_pressed("UP")):
-            if nave_sprite.y > 70:
+            if nave_sprite.y > 0:
                 nave_sprite.move_y(-vel_nave)
 
         if(teclado.key_pressed("DOWN")):  
@@ -38,7 +38,7 @@ def tiro(janela,nave_sprite,lista,temp,vel_tiro):
         if(teclado.key_pressed("SPACE") and temp > 0.5):
 
             tiro  = Sprite("images/fase1/shot.png",5)
-            tiro.set_position(nave_sprite.x, nave_sprite.y-37)
+            tiro.set_position(nave_sprite.x + 60, nave_sprite.y-37)
             tiro.set_total_duration(2000)
             lista.append(tiro)
             temp = 0
