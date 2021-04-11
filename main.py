@@ -16,7 +16,7 @@ while True:
         var_global = menu.menu_inicial(var_global)
 
     elif var_global == 1:
-        var_global = fase1.fase(var_global)
+        var_global = fase2.fase2(var_global)
 
     elif var_global == 2:
         var_global = tela_gameover.morreu(var_global)
