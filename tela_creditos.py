@@ -7,7 +7,7 @@ def creditos():
 
     fundo = GameImage("images/tela_creditos/credits.png")
     voltar = GameImage("images/tela_creditos/voltar_menu.png")
-    voltar.set_position(790, 650)
+    voltar.set_position(1080, 650)
 
     mouse = Window.get_mouse()
     click = 0
