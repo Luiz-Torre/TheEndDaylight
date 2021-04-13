@@ -1,32 +1,36 @@
-import menu
-import fase1
-import tela_creditos
-import fase2
-import fase3
-import tela_gameover
-import tela_tutorial1
-import tela_tutorial2 
-import tela_tutorial3
+from menu import menu_inicial
+from tela_creditos import creditos
+from tela_tutorial1 import tutorial1
+from tela_tutorial2 import tutorial2 
+from tela_tutorial3 import tutorial3
+from fase1 import fase
+from fase2 import fase2
+from fase3 import fase3
+from tela_gameover import morreu
+
 
 # Responsavel por fazer as trocas de tela
 var_global = 0 
 
 while True:
     if var_global == 0:
-        var_global = menu.menu_inicial(var_global)
+        var_global = menu_inicial()
 
     elif var_global == 1:
-        var_global = fase2.fase2(var_global)
+        var_global = fase2(var_global)
 
     elif var_global == 2:
-        var_global = tela_gameover.morreu(var_global)
+        var_global = morreu(var_global)
 
     elif var_global == 3:
-        var_global = tela_tutorial1.tutorial(var_global)       
+        var_global = tutorial1()       
 
     elif var_global == 4:
-        var_global = tela_tutorial2.tutorial(var_global) 
+        var_global = tutorial2() 
     
     elif var_global == 5:
-        var_global = tela_tutorial3.tutorial(var_global) 
+        var_global = tutorial3() 
+
+    elif var_global == 6:
+        var_global = creditos()
  

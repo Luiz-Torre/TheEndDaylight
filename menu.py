@@ -3,7 +3,7 @@ from PPlay.gameimage import *
 #Inicialização
 
 
-def menu_inicial(var_global):
+def menu_inicial():
     janela = Window(1280,768)
     janela.set_title("The End of Daylight")
     fundo_menu = GameImage("images/menu/fundo.png")
@@ -19,6 +19,7 @@ def menu_inicial(var_global):
 
 
     mouse = Window.get_mouse()
+    click = 0
 
     #Game Loop
     while True:
@@ -27,19 +28,18 @@ def menu_inicial(var_global):
         btn_creditos.draw()
         btn_comandos.draw()
 
-        if mouse.is_over_object(btn_jogar) and mouse.is_button_pressed(1): 
-            var_global = 1
-            return var_global
+        click += janela.delta_time()
 
-        if mouse.is_over_object(btn_creditos) and mouse.is_button_pressed(1):
-            var_global = 2
-            # return var_global        
+        if click > 0.5 and mouse.is_button_pressed(1):
+            click = 0
+            if mouse.is_over_object(btn_jogar): 
+                return 1
 
-        if mouse.is_over_object(btn_comandos) and mouse.is_button_pressed(1):
-            var_global = 3
-            return var_global     
-            
+            if mouse.is_over_object(btn_creditos):
+                return 6
 
-
+            if mouse.is_over_object(btn_comandos):
+                return 3   
 
         janela.update()
+    

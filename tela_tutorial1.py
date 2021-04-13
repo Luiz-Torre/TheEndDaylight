@@ -2,7 +2,7 @@ from PPlay.window import *
 from PPlay.gameimage import *
 #Inicialização
 
-def tutorial(var_global):
+def tutorial1():
     janela = Window(1280,768)
     janela.set_title("Tutorial Fase 1")
 
@@ -15,18 +15,20 @@ def tutorial(var_global):
     btn_voltar.set_position(100,630)
 
     mouse = Window.get_mouse()
+    click = 0
 
     while True:
         fundo_gameover.draw()
         btn_proximo.draw()
         btn_voltar.draw()
 
-        if mouse.is_over_object(btn_proximo) and mouse.is_button_pressed(1): 
-            var_global = 4
-            return var_global
+        click += janela.delta_time()
 
-        if mouse.is_over_object(btn_voltar) and mouse.is_button_pressed(1): 
-            var_global = 0
-            return var_global
+        if mouse.is_button_pressed(1) and click > 0.5:
+            if mouse.is_over_object(btn_proximo): 
+                return 4
+
+            if mouse.is_over_object(btn_voltar): 
+                return 0
 
         janela.update()
