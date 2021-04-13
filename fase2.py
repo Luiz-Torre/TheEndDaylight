@@ -43,16 +43,35 @@ def fase2(var_global):
     jump1= False
 
     #Teste
-    animacao  = Sprite("images/fase2/Astronaut_Run.png",6)
-    animacao.set_position(0, 500)
+    astronaut = []
+    sprite_astrounaut = Sprite("images/fase2/run_1")
+    sprite_astrounaut.set_position(0, 500)
+    astronaut.append(sprite_astrounaut)
+
+    sprite_astrounaut = Sprite("images/fase2/run_2")
+    sprite_astrounaut.set_position(0, 500)
+    astronaut.append(sprite_astrounaut)
+
+    sprite_astrounaut = Sprite("images/fase2/run_3")
+    sprite_astrounaut.set_position(0, 500)
+    astronaut.append(sprite_astrounaut)
+
+    sprite_astrounaut = Sprite("images/fase2/run_4")
+    sprite_astrounaut.set_position(0, 500)
+    astronaut.append(sprite_astrounaut)
+
+    sprite_astrounaut = Sprite("images/fase2/run_5")
+    sprite_astrounaut.set_position(0, 500)
+    astronaut.append(sprite_astrounaut)
+
+    sprite_astrounaut = Sprite("images/fase2/run_6")
+    sprite_astrounaut.set_position(0, 500)
+    astronaut.append(sprite_astrounaut)
+
     while True:
 
         #Teste
-        velXmap = 120*janela.delta_time()
-
-        animacao.set_total_duration(700)    
-            
-
+        velXmap = 120*janela.delta_time()         
 
         fundo.draw()
         pause_icon.draw()
@@ -72,46 +91,50 @@ def fase2(var_global):
         janela.draw_text(f"Fps: {fps_atual}", 800, 20, size=30, color=(240,240,240), font_name="Computer_says_no", italic=True)
         
 
+        for move_personagem in astronaut:
+            if(teclado.key_pressed("RIGHT")):
+                fundo.move_x(-velXmap)
+                move_personagem.move_x(VelX*janela.delta_time())
+                move_personagem.update()
 
-        if(teclado.key_pressed("RIGHT")):
-            fundo.move_x(-velXmap)
-            animacao.move_x(VelX*janela.delta_time())
-            animacao.update()
-
-        if(teclado.key_pressed("LEFT") and animacao.x>0):
-            fundo.move_x(velXmap)
-            animacao.move_x(-VelX*janela.delta_time())
-            animacao.update()
-            
-        if teclado.key_pressed("UP"):
-            if(jump1):
-                velY = 250
-                animacao.move_y(-velY* janela.delta_time())
-            jump1 = False
+            if(teclado.key_pressed("LEFT") and move_personagem.x>0):
+                fundo.move_x(velXmap)
+                move_personagem.move_x(-VelX*janela.delta_time())
+                move_personagem.update()
+                
+            if teclado.key_pressed("UP"):
+                if(jump1):
+                    velY = 250
+                    move_personagem.move_y(-velY* janela.delta_time())
+                jump1 = False
 
         for chao_draw in lista_chao:
             chao_draw.draw()
                
-            
-            if var2 == 1:
-                animacao.move_y(7)
-                if Collision.collided_perfect(chao_draw,animacao):
+            for move_personagem in astronaut:
+                if var2 == 1:
+                    move_personagem.move_y(7)
                     var2=0
 
-            if not animacao.x>= chao_draw.x and animacao.x<= chao_draw.x + chao_draw.width and animacao.y - animacao.height>=chao_draw.y - chao_draw.height:
-                jump1 = True
-                
+                if Collision.collided_perfect(chao_draw,move_personagem):
+                    jump1 = True
+
+
+            # if :
+
             
         if jump1 == False:
-            animacao.move_y(-velY* janela.delta_time())  
-            velY -= 200* janela.delta_time()
+            for move_personagem in astronaut:
+
+                move_personagem.move_y(-velY* janela.delta_time())  
+                velY -= 200* janela.delta_time()
 
 
             
 
             
        
-        animacao.draw()
+        move_personagem.draw()
 
         janela.update()
 
