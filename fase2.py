@@ -85,7 +85,7 @@ def fase2(var_global):
             
         if teclado.key_pressed("UP"):
             if(jump1):
-                velY = 300
+                velY = 250
                 animacao.move_y(-velY* janela.delta_time())
             jump1 = False
 
@@ -98,14 +98,18 @@ def fase2(var_global):
                 if Collision.collided_perfect(chao_draw,animacao):
                     var2=0
 
-            if animacao.y >= chao_draw.y:
-                jump1 = True 
-
-
+            if not animacao.x>= chao_draw.x and animacao.x<= chao_draw.x + chao_draw.width and animacao.y - animacao.height>=chao_draw.y - chao_draw.height:
+                jump1 = True
+                
+            
         if jump1 == False:
             animacao.move_y(-velY* janela.delta_time())  
             velY -= 200* janela.delta_time()
 
+
+            
+
+            
        
         animacao.draw()
 
