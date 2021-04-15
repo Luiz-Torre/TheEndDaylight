@@ -4,10 +4,11 @@ from PPlay.sprite import *
 import nave_geral
 import obstaculos_fase1
 import colisoes_fase1
+from fase2 import fase2
 #Inicialização
 
 
-def fase(var_global):
+def fase1():
 
     janela = Window(1280,768)
     janela.set_title("Fase 1 - The End Daylight")
@@ -60,13 +61,14 @@ def fase(var_global):
 
     #variáveis
     temp_tiro, temp_asteroide, temp_satelite_off,temp_satelite_on = 0, 0, 0, 0
-    vida = 4
+    time, vida = 0, 4
 
     while True:
         ## FrameRate
         cont += janela.delta_time()
         fps += 1
         if cont > 1:
+            time += 1
             fps_atual = fps
             cont,fps = 0, 0
 
@@ -87,8 +89,9 @@ def fase(var_global):
         fundo.draw()
         fundo2.draw()
         pause_icon.draw()
-        janela.draw_text(f"Pontos: {int(pontos)}", 400, 20, size=45, color=(240,240,240), font_name="Computer_says_no")
-        janela.draw_text(f"Fps: {fps_atual}", 800, 20, size=30, color=(240,240,240), font_name="Computer_says_no", italic=True)
+        janela.draw_text(f"Tempo 00:{60-time}", 450, 20, size=45, color=(240,240,240), font_name="Computer_says_no")
+        janela.draw_text(f"Pontos {int(pontos)}", 650, 20, size=45, color=(240,240,240), font_name="Computer_says_no")
+        janela.draw_text(f"Fps: {fps_atual}", 250, 20, size=30, color=(240,240,240), font_name="Computer_says_no", italic=True)
         nave.draw() 
 
         ## Pausa
@@ -131,15 +134,16 @@ def fase(var_global):
             vida_list[vida_for].draw()
 
         ## Voltando para o menu
-        if(teclado.key_pressed("ESC")):
-            var_global = 0
-            return var_global
+        if teclado.key_pressed("ESC"):
+            exit()
 
         ## Gameover
         if vida == 0:
-            var_global = 2
-            return var_global
+            return 2
 
+        ## Proxima fase
+        if time >= 60:
+            return 2
 
         janela.update()
 
@@ -162,8 +166,7 @@ def fase(var_global):
                     var = 1
 
                 if mouse.is_over_object(sair_pause):
-                    var_global = 0
-                    return var_global
+                    return 0
 
 
             

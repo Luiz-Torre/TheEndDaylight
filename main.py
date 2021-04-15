@@ -3,9 +3,7 @@ from tela_creditos import creditos
 from tela_tutorial1 import tutorial1
 from tela_tutorial2 import tutorial2 
 from tela_tutorial3 import tutorial3
-from fase1 import fase
-from fase2 import fase2
-from fase3 import fase3
+from game import fases
 from tela_gameover import morreu
 
 
@@ -17,7 +15,7 @@ while True:
         var_global = menu_inicial()
 
     elif var_global == 1:
-        var_global = fase(var_global)
+        var_global = fases(var_global)
 
     elif var_global == 2:
         var_global = morreu(var_global)

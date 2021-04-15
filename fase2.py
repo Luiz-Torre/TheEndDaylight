@@ -6,7 +6,7 @@ from PPlay.collision import *
 #Inicialização
 
 #Corrigindo para a Amanda conseguir. PS: Python > C
-def fase2(var_global):
+def fase2():
 
     janela = Window(1280,768)
     janela.set_title("Fase 2 - The End Daylight")
@@ -155,5 +155,4 @@ def fase2(var_global):
                     var = 1
 
                 if mouse.is_over_object(sair_pause):
-                    var_global = 0
-                    return var_global
+                    return 0
