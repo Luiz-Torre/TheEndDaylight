@@ -5,7 +5,7 @@ import criando_mapa_fase2
 from PPlay.collision import *
 #Inicialização
 
-
+#Corrigindo para a Amanda conseguir. PS: Python > C
 def fase2(var_global):
 
     janela = Window(1280,768)
