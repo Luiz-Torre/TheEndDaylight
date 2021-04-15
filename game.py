@@ -11,5 +11,9 @@ def fases(var):
             var = fase2()
         elif var == 3:
             var = fase3()
+        # Morreu
+        elif var == -1:
+            return 2
+        # Menu
         else:
             return 0

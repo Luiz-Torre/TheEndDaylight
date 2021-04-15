@@ -139,7 +139,7 @@ def fase1():
 
         ## Gameover
         if vida == 0:
-            return 2
+            return -1
 
         ## Proxima fase
         if time >= 60:
