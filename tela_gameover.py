@@ -11,17 +11,22 @@ def morreu(var_global):
     
     btn_tryagain = GameImage("images/gameover/button_tentenovamente.png")
     btn_tryagain.set_position(400,500)
+
+    btn_return = GameImage("images/gameover/voltar_menu.png")
+    btn_return.set_position(405,600)
     
-    teclado = Window.get_keyboard()
     mouse = Window.get_mouse()
 
     while True:
         fundo_gameover.draw()
         btn_tryagain.draw()
+        btn_return.draw()
 
-        if mouse.is_button_pressed(1) and mouse.is_over_object(btn_tryagain): 
-            var_global = 1
-            return var_global
+        if mouse.is_button_pressed(1):
+            if mouse.is_over_object(btn_return): 
+                return 0
+            if mouse.is_over_object(btn_tryagain): 
+                return 1
 
 
         janela.update()

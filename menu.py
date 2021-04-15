@@ -30,7 +30,7 @@ def menu_inicial():
 
         click += janela.delta_time()
 
-        if click > 0.5 and mouse.is_button_pressed(1):
+        if click > 1 and mouse.is_button_pressed(1):
             click = 0
             if mouse.is_over_object(btn_jogar): 
                 return 1

@@ -17,7 +17,7 @@ while True:
         var_global = menu_inicial()
 
     elif var_global == 1:
-        var_global = fase2(var_global)
+        var_global = fase(var_global)
 
     elif var_global == 2:
         var_global = morreu(var_global)

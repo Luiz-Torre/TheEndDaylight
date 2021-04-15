@@ -24,7 +24,7 @@ def tutorial3():
 
         click += janela.delta_time()
 
-        if mouse.is_button_pressed(1) and click > 0.5:
+        if mouse.is_button_pressed(1) and click > 1:
             if mouse.is_over_object(btn_voltar): 
                 return 0
 
