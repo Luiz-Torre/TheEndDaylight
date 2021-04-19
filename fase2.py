@@ -1,3 +1,4 @@
+from typing import Counter
 from PPlay.window import *
 from PPlay.gameimage import *
 from PPlay.sprite import *
@@ -44,29 +45,32 @@ def fase2():
 
     #Teste
     astronaut = []
-    sprite_astrounaut = Sprite("images/fase2/run_1")
+    sprite_astrounaut = Sprite("images/fase2/run_1.png")
     sprite_astrounaut.set_position(0, 500)
     astronaut.append(sprite_astrounaut)
 
-    sprite_astrounaut = Sprite("images/fase2/run_2")
+    sprite_astrounaut = Sprite("images/fase2/run_2.png")
     sprite_astrounaut.set_position(0, 500)
     astronaut.append(sprite_astrounaut)
 
-    sprite_astrounaut = Sprite("images/fase2/run_3")
+    sprite_astrounaut = Sprite("images/fase2/run_3.png")
     sprite_astrounaut.set_position(0, 500)
     astronaut.append(sprite_astrounaut)
 
-    sprite_astrounaut = Sprite("images/fase2/run_4")
+    sprite_astrounaut = Sprite("images/fase2/run_4.png")
     sprite_astrounaut.set_position(0, 500)
     astronaut.append(sprite_astrounaut)
 
-    sprite_astrounaut = Sprite("images/fase2/run_5")
+    sprite_astrounaut = Sprite("images/fase2/run_5.png")
     sprite_astrounaut.set_position(0, 500)
     astronaut.append(sprite_astrounaut)
 
-    sprite_astrounaut = Sprite("images/fase2/run_6")
+    sprite_astrounaut = Sprite("images/fase2/run_6.png")
     sprite_astrounaut.set_position(0, 500)
     astronaut.append(sprite_astrounaut)
+
+    var_anda = 0
+    count_chao = 0
 
     while True:
 
@@ -91,50 +95,82 @@ def fase2():
         janela.draw_text(f"Fps: {fps_atual}", 800, 20, size=30, color=(240,240,240), font_name="Computer_says_no", italic=True)
         
 
-        for move_personagem in astronaut:
-            if(teclado.key_pressed("RIGHT")):
-                fundo.move_x(-velXmap)
-                move_personagem.move_x(VelX*janela.delta_time())
-                move_personagem.update()
+        if(teclado.key_pressed("RIGHT")):
+            var_anda = 1
+               
 
-            if(teclado.key_pressed("LEFT") and move_personagem.x>0):
+        if var_anda == 1:
+            for move_personagem in astronaut:
+                    fundo.move_x(-velXmap)
+                    move_personagem.move_x(VelX*janela.delta_time())
+
+            var_anda = 0
+
+        if(teclado.key_pressed("LEFT") and move_personagem.x>0):
+            var_anda = 2
+
+        if var_anda == 2:
+            for move_personagem in astronaut:
+
                 fundo.move_x(velXmap)
                 move_personagem.move_x(-VelX*janela.delta_time())
-                move_personagem.update()
-                
-            if teclado.key_pressed("UP"):
-                if(jump1):
-                    velY = 250
-                    move_personagem.move_y(-velY* janela.delta_time())
-                jump1 = False
+
+            var_anda = 0
+            
+        if teclado.key_pressed("UP"):
+            if(jump1):
+                var_anda = 3
+            
+        if var_anda == 3:
+            for move_personagem in astronaut:
+
+                velY = 250
+                move_personagem.move_y(-velY* janela.delta_time())
+
+            jump1 = False
+
+
+        for i in astronaut:
+            i.draw()
+
+
+
 
         for chao_draw in lista_chao:
             chao_draw.draw()
                
             for move_personagem in astronaut:
                 if var2 == 1:
-                    move_personagem.move_y(7)
+                    move_personagem.move_y(5)
                     var2=0
 
                 if Collision.collided_perfect(chao_draw,move_personagem):
                     jump1 = True
 
-
-            # if :
-
             
-        if jump1 == False:
+
+        for chao_draw in range(len(lista_chao)):
             for move_personagem in astronaut:
 
-                move_personagem.move_y(-velY* janela.delta_time())  
-                velY -= 200* janela.delta_time()
+                if  not Collision.collided_perfect(lista_chao[chao_draw],move_personagem):
+                        count_chao += 1
+                        
+                if count_chao >= len(lista_chao):
+                        velY -= 100* janela.delta_time()
+
+                        move_personagem.move_y(velY* janela.delta_time())  
+                        count_chao = 0
+
+                else:
+                    break
+            
+            break
 
 
             
 
             
-       
-        move_personagem.draw()
+
 
         janela.update()
 
