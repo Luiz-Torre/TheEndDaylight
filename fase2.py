@@ -96,41 +96,27 @@ def fase2():
         
 
         if(teclado.key_pressed("RIGHT")):
-            var_anda = 1
-               
+            fundo.move_x(-velXmap)
+            astronaut[0].move_x(VelX*janela.delta_time())
 
-        if var_anda == 1:
-            for move_personagem in astronaut:
-                    fundo.move_x(-velXmap)
-                    move_personagem.move_x(VelX*janela.delta_time())
-
-            var_anda = 0
 
         if(teclado.key_pressed("LEFT") and move_personagem.x>0):
-            var_anda = 2
-
-        if var_anda == 2:
-            for move_personagem in astronaut:
-
                 fundo.move_x(velXmap)
-                move_personagem.move_x(-VelX*janela.delta_time())
+                astronaut[0].move_x(-VelX*janela.delta_time())
 
-            var_anda = 0
             
         if teclado.key_pressed("UP"):
             if(jump1):
-                var_anda = 3
-            
-        if var_anda == 3:
-            for move_personagem in astronaut:
-
                 velY = 250
-                move_personagem.move_y(-velY* janela.delta_time())
+                astronaut[0].move_y(-velY* janela.delta_time())
 
             jump1 = False
 
 
         for i in astronaut:
+            i.x = astronaut[0].x
+            i.y = astronaut[0].y
+            print(i)
             i.draw()
 
 
@@ -148,23 +134,21 @@ def fase2():
                     jump1 = True
 
             
-
-        for chao_draw in range(len(lista_chao)):
-            for move_personagem in astronaut:
+        for move_personagem in astronaut:
+            for chao_draw in range(len(lista_chao)):
 
                 if  not Collision.collided_perfect(lista_chao[chao_draw],move_personagem):
                         count_chao += 1
                         
-                if count_chao >= len(lista_chao):
-                        velY -= 100* janela.delta_time()
+            if count_chao >= len(lista_chao):
+                    velY -= 100* janela.delta_time()
 
-                        move_personagem.move_y(velY* janela.delta_time())  
-                        count_chao = 0
+                    move_personagem.move_y(-velY* janela.delta_time())  
+                    count_chao = 0
+            else:
+                count_chao = 0
 
-                else:
-                    break
-            
-            break
+        
 
 
             
