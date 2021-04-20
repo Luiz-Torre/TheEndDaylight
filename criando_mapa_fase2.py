@@ -8,19 +8,22 @@ def criar(janela):
     chao.set_position(0,janela.height - chao.height+15)
     lista_chao.append(chao)
     i = 1
-    while(i<70):
+    while(i<74):
         if i%5 == 0:
-            i = i +2
+            i = i +4
         
 
-        if i%3 == 0:
-            i = i+1
+        elif i%6 == 0:
+            i = i+3
 
-       
+
+        else:
+            i += 1
+
         chao = Sprite("images/fase2/chao_azul_pequeno.png")
         chao.set_position(108*i,janela.height - chao.height+15)
         lista_chao.append(chao)
-        i += 1
+
 
         
     

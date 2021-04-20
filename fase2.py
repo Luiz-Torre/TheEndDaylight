@@ -38,8 +38,7 @@ def fase2():
     fps = 0
     fps_atual = 0
     var = 1
-    var2 = 1
-    VelX= 150
+    VelX= 90
     velY = 300
     jump1= False
 
@@ -77,7 +76,7 @@ def fase2():
 
 
         #Teste
-        velXmap = 250*janela.delta_time()         
+        velXmap = 125*janela.delta_time()         
 
         fundo.draw()
         pause_icon.draw()
@@ -99,8 +98,8 @@ def fase2():
 
         if(teclado.key_pressed("RIGHT")):
             if astronaut[0].x >= janela.width/2:
-
-                fundo.move_x(-velXmap)
+                if fundo.x<= 0:
+                    fundo.move_x(-velXmap)
                 for a in lista_chao:
                     a.move_x(-VelX*janela.delta_time()- VelX*janela.delta_time() )
 
@@ -114,13 +113,13 @@ def fase2():
 
         if(teclado.key_pressed("LEFT") and move_personagem.x>0):
 
-                astronaut[0].move_x(-VelX*janela.delta_time())
+                astronaut[0].move_x(-VelX*janela.delta_time()*2)
 
 
             
         if teclado.key_pressed("UP"):
             if(jump1):
-                velY = 250
+                velY = 400
                 astronaut[0].move_y(-velY* janela.delta_time())
 
             jump1 = False
@@ -132,16 +131,10 @@ def fase2():
         for chao_draw in lista_chao:
             if chao_draw.x <= janela.width + 500:
                 chao_draw.draw()
-            if chao_draw.x <0-chao_draw.width:
+            if chao_draw.x <=0-chao_draw.width:
                 lista_chao.pop(lista_chao.index(chao_draw))
-               
-            for move_personagem in astronaut:
-                if var2 == 1:
-                    move_personagem.move_y(5)
-                    var2=0
 
-                if Collision.collided_perfect(chao_draw,move_personagem):
-                    jump1 = True
+
 
             
         for move_personagem in astronaut:
@@ -149,27 +142,32 @@ def fase2():
 
                 if  not Collision.collided_perfect(lista_chao[chao_draw],move_personagem):
                         count_chao += 1
+
+                else:
+                    jump1 = True
                         
             if count_chao >= len(lista_chao):
-                    velY -= 100* janela.delta_time()
+                    velY -= 50* janela.delta_time()
 
                     move_personagem.move_y(-velY* janela.delta_time())  
                     count_chao = 0
             else:
                 count_chao = 0
 
+
+
         
 
-            for i in astronaut:
-                i.x = astronaut[0].x
-                i.y = astronaut[0].y
-                i.draw()
+        for i in astronaut:
+            i.x = astronaut[0].x
+            i.y = astronaut[0].y
+            i.draw()
 
-                
-                
+            
+            
 
-                if i.y> janela.height:
-                    return -1
+            if i.y> janela.height:
+                return -1
 
             
 
