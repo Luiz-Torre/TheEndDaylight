@@ -1,1 +1,2 @@
-                        # velY -= 100* janela.delta_time()
+for a in lista_chao:
+        #     a.x = lista_chao[0]

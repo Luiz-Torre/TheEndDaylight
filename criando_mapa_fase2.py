@@ -22,11 +22,11 @@ def criar(janela):
     lista_chao.append(chao)
     
     chao = Sprite("images/fase2/chao_azul_pequeno.png")
-    chao.set_position(540,janela.height - chao.height+15)
+    chao.set_position(624,janela.height - chao.height+15)
     lista_chao.append(chao)
 
     chao = Sprite("images/fase2/chao_azul_pequeno.png")
-    chao.set_position(756,janela.height - chao.height+15)
+    chao.set_position(924,janela.height - chao.height+15)
     lista_chao.append(chao)
 
  

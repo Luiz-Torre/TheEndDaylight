@@ -97,11 +97,15 @@ def fase2():
 
         if(teclado.key_pressed("RIGHT")):
             fundo.move_x(-velXmap)
+            for a in lista_chao:
+                a.move_x(-velXmap)        
             astronaut[0].move_x(VelX*janela.delta_time())
 
 
         if(teclado.key_pressed("LEFT") and move_personagem.x>0):
                 fundo.move_x(velXmap)
+                lista_chao[0].move_x(+velXmap)        
+
                 astronaut[0].move_x(-VelX*janela.delta_time())
 
             
@@ -119,8 +123,12 @@ def fase2():
             print(i)
             i.draw()
 
+            if i.y> janela.height:
+                return -1
 
 
+        
+            
 
         for chao_draw in lista_chao:
             chao_draw.draw()
@@ -151,7 +159,7 @@ def fase2():
         
 
 
-            
+
 
             
 
