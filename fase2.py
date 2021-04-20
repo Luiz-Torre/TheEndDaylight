@@ -39,7 +39,7 @@ def fase2():
     fps_atual = 0
     var = 1
     var2 = 1
-    VelX= 100
+    VelX= 150
     velY = 300
     jump1= False
 
@@ -77,7 +77,7 @@ def fase2():
 
 
         #Teste
-        velXmap = 120*janela.delta_time()         
+        velXmap = 250*janela.delta_time()         
 
         fundo.draw()
         pause_icon.draw()
@@ -98,19 +98,23 @@ def fase2():
         
 
         if(teclado.key_pressed("RIGHT")):
-            fundo.move_x(-velXmap)
-            lista_chao[0].move_x(-velXmap)        
-            astronaut[0].move_x(VelX*janela.delta_time())
-            astronaut.update()
+            if astronaut[0].x >= janela.width/2:
+
+                fundo.move_x(-velXmap)
+                for a in lista_chao:
+                    a.move_x(-VelX*janela.delta_time()- VelX*janela.delta_time() )
+
+            else:        
+                fundo.move_x(-velXmap)
+                for a in lista_chao:
+                    a.move_x(-VelX*janela.delta_time())
+                astronaut[0].move_x(VelX*janela.delta_time())
 
 
 
         if(teclado.key_pressed("LEFT") and move_personagem.x>0):
-                fundo.move_x(velXmap)
-                lista_chao[0].move_x(+velXmap)        
 
                 astronaut[0].move_x(-VelX*janela.delta_time())
-                astronaut.update()
 
 
             
@@ -122,14 +126,14 @@ def fase2():
             jump1 = False
 
 
-        
 
-
-        
             
 
         for chao_draw in lista_chao:
-            chao_draw.draw()
+            if chao_draw.x <= janela.width + 500:
+                chao_draw.draw()
+            if chao_draw.x <0-chao_draw.width:
+                lista_chao.pop(lista_chao.index(chao_draw))
                
             for move_personagem in astronaut:
                 if var2 == 1:
@@ -159,13 +163,8 @@ def fase2():
             for i in astronaut:
                 i.x = astronaut[0].x
                 i.y = astronaut[0].y
-                while(var_anda<1):
-                    var_anda += janela.delta_time()
-                
-                if(var_anda>= 1):
-                    i.draw()
-                    janela.update()
-                    var_anda = 0
+                i.draw()
+
                 
                 
 

@@ -4,31 +4,25 @@ from PPlay.sprite import *
 
 def criar(janela):
     lista_chao = []
-
     chao = Sprite("images/fase2/chao_azul_pequeno.png")
     chao.set_position(0,janela.height - chao.height+15)
     lista_chao.append(chao)
+    i = 1
+    while(i<70):
+        if i%5 == 0:
+            i = i +2
+        
 
-    chao = Sprite("images/fase2/chao_azul_pequeno.png")
-    chao.set_position(108,janela.height - chao.height+15)
-    lista_chao.append(chao)
+        if i%3 == 0:
+            i = i+1
 
-    chao = Sprite("images/fase2/chao_azul_pequeno.png")
-    chao.set_position(216,janela.height - chao.height+15)
-    lista_chao.append(chao)
+       
+        chao = Sprite("images/fase2/chao_azul_pequeno.png")
+        chao.set_position(108*i,janela.height - chao.height+15)
+        lista_chao.append(chao)
+        i += 1
 
-    chao = Sprite("images/fase2/chao_azul_pequeno.png")
-    chao.set_position(324,janela.height - chao.height+15)
-    lista_chao.append(chao)
+        
     
-    chao = Sprite("images/fase2/chao_azul_pequeno.png")
-    chao.set_position(624,janela.height - chao.height+15)
-    lista_chao.append(chao)
-
-    chao = Sprite("images/fase2/chao_azul_pequeno.png")
-    chao.set_position(924,janela.height - chao.height+15)
-    lista_chao.append(chao)
-
  
-    
     return lista_chao
