@@ -74,6 +74,8 @@ def fase2():
 
     while True:
 
+
+
         #Teste
         velXmap = 120*janela.delta_time()         
 
@@ -97,9 +99,10 @@ def fase2():
 
         if(teclado.key_pressed("RIGHT")):
             fundo.move_x(-velXmap)
-            for a in lista_chao:
-                a.move_x(-velXmap)        
+            lista_chao[0].move_x(-velXmap)        
             astronaut[0].move_x(VelX*janela.delta_time())
+            astronaut.update()
+
 
 
         if(teclado.key_pressed("LEFT") and move_personagem.x>0):
@@ -107,6 +110,8 @@ def fase2():
                 lista_chao[0].move_x(+velXmap)        
 
                 astronaut[0].move_x(-VelX*janela.delta_time())
+                astronaut.update()
+
 
             
         if teclado.key_pressed("UP"):
@@ -117,14 +122,7 @@ def fase2():
             jump1 = False
 
 
-        for i in astronaut:
-            i.x = astronaut[0].x
-            i.y = astronaut[0].y
-            print(i)
-            i.draw()
-
-            if i.y> janela.height:
-                return -1
+        
 
 
         
@@ -158,11 +156,23 @@ def fase2():
 
         
 
+            for i in astronaut:
+                i.x = astronaut[0].x
+                i.y = astronaut[0].y
+                while(var_anda<1):
+                    var_anda += janela.delta_time()
+                
+                if(var_anda>= 1):
+                    i.draw()
+                    janela.update()
+                    var_anda = 0
+                
+                
 
-
+                if i.y> janela.height:
+                    return -1
 
             
-
 
         janela.update()
 
