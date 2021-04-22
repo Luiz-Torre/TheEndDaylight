@@ -42,7 +42,7 @@ def fase2(pontos,vida):
             vida_img.set_position(vida_num*50,20)
             vida_list.append(vida_img)
 
-    lista_chao = criando_mapa_fase2.criar(janela)
+    lista_chao, lista_acid, matriz_obs = criando_mapa_fase2.criar(janela)
     time = 0
     cont = 0
     fps = 0
@@ -69,7 +69,8 @@ def fase2(pontos,vida):
         
     var_anda = 0
     count_chao = 0
-
+    var_espinho = 0
+    time_esp = 0
     evita_bug = 0
     while True:
 
@@ -100,8 +101,8 @@ def fase2(pontos,vida):
                 cont,fps = 0, 0
 
             time_anda += janela.delta_time()
-
-
+               
+                    
  
 
             ## Movimentacao
@@ -110,13 +111,22 @@ def fase2(pontos,vida):
                     if fundo.x<= 0:
                         fundo.move_x(-velXmap)
                     for a in lista_chao:
-                        a.move_x(-VelX*janela.delta_time()- VelX*janela.delta_time() )
-            
+                        a.move_x(-VelX*janela.delta_time()- VelX*janela.delta_time())
+                    for a in lista_acid:
+                        a.move_x(-VelX*janela.delta_time()- VelX*janela.delta_time())
+                    for linha in matriz_obs:
+                        for a in linha:
+                            a.move_x(-VelX*janela.delta_time()- VelX*janela.delta_time())
 
                 else:        
                     fundo.move_x(-velXmap)
                     for a in lista_chao:
                         a.move_x(-VelX*janela.delta_time())
+                    for a in lista_acid:
+                        a.move_x(-VelX*janela.delta_time())
+                    for linha in matriz_obs:
+                        for a in linha:
+                            a.move_x(-VelX*janela.delta_time())
                     astronaut[var_anda-1][index].move_x(VelX*janela.delta_time())
             
                 var_anda = 1
@@ -131,12 +141,13 @@ def fase2(pontos,vida):
             if teclado.key_pressed("UP") and evita_bug >=1:
                 var_anda = 1
                 if jump:
-                    velY = 270
+                    velY = 215
                     astronaut[var_anda-1][index].move_y(-velY * janela.delta_time())
                     jump = False  
             
 
 
+            
 
             if var_anda >= 1 and time_anda >= 0.1:
                 index += 1
@@ -153,15 +164,30 @@ def fase2(pontos,vida):
 
             astronaut[var_anda-1][index].draw()
 
+            for linha in astronaut:
+                for setando_posicao in linha:
+                    setando_posicao.set_position(astronaut[var_anda-1][index].x,astronaut[var_anda-1][index].y)
 
+            for acid_draw in lista_acid:
+                if acid_draw.x <= janela.width + 50:
+                    acid_draw.draw()
+
+                if acid_draw.x <= 0 - acid_draw.width:
+                    lista_acid.pop(lista_acid.index(acid_draw))
+                    
+                if Collision.collided_perfect(astronaut[var_anda-1][index],acid_draw) and evita_bug >=1:
+                    vida -= 1
+                    return 2, pontos, vida
+
+            
             ## Plataforma
             for chao_draw in lista_chao:
-                if chao_draw.x <= janela.width + 500:
+                if chao_draw.x <= janela.width + 50:
                     chao_draw.draw()
                 if chao_draw.x <= 0 - chao_draw.width:
                     lista_chao.pop(lista_chao.index(chao_draw))
 
-
+            
             #for move_personagem in astronaut:
             for chao_draw in range(len(lista_chao)):
 
@@ -170,7 +196,7 @@ def fase2(pontos,vida):
 
                         
             if count_chao >= len(lista_chao):
-                velY -= 145 * janela.delta_time()
+                velY -= 150 * janela.delta_time()
                 astronaut[var_anda-1][index].move_y(-velY * janela.delta_time())  
                 jump = False
 
@@ -180,23 +206,37 @@ def fase2(pontos,vida):
 
             count_chao = 0
 
-            
-            if astronaut[var_anda-1][index].y > janela.height and evita_bug >=1:
-                vida -= 1
-                return 2, pontos, vida
+            if time_esp >= 0.2:
+                var_espinho += 1
+                if var_espinho > len(matriz_obs[0]) -1:
+                    var_espinho = 0
+
+                time_esp = 0  
 
 
 
-            for linha in astronaut:
-                for setando_posicao in linha:
-                    setando_posicao.set_position(astronaut[var_anda-1][index].x,astronaut[var_anda-1][index].y)
+            for linha in matriz_obs:
+                if linha[var_espinho].x <= janela.width + 50:
+                    linha[var_espinho].draw()
+
+                if linha[var_espinho].x <= 0 - linha[var_espinho].width:
+                    matriz_obs.pop(matriz_obs.index(linha))
+                    
+                if Collision.collided_perfect(astronaut[var_anda-1][index],linha[var_espinho]) and evita_bug >=1:
+                    vida -= 1
+                    return 2, pontos, vida
+
+
+            time_esp += janela.delta_time()
+
+
 
             ## Gameover
             if vida == 0:
                 return -1, pontos, vida
 
             ## Proxima fase
-            if time >= 60:
+            if time >= 120:
                 return 2, pontos, vida
             
 
