@@ -11,7 +11,7 @@ from fase2 import fase2
 def fase1():
 
     janela = Window(1280,768)
-    janela.set_title("Fase 1 - The End Daylight")
+    janela.set_title("Fase 1 - The End of Daylight")
     teclado = Window.get_keyboard()
     mouse = Window.get_mouse()
 
@@ -143,7 +143,7 @@ def fase1():
 
         ## Proxima fase
         if time >= 60:
-            return 2
+            return 2, pontos
 
         janela.update()
 

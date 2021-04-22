@@ -6,7 +6,7 @@ from fase3 import fase3
 
 def transicao():
     janela = Window(1280,768)
-    janela.set_title("Missao Concluida - The End Daylight")
+    janela.set_title("Missao Concluida - The End of Daylight")
     mouse = Window.get_mouse()
 
     fundo = GameImage("images/tela_geral/transition.png")
@@ -31,17 +31,22 @@ def transicao():
         janela.update()
 
 def fases(var):
+    pontos = 0
 
     while True:
         if var == 1:
-            var = fase1()
+            var, pontos = fase1()
         elif var == 2:
             prox = transicao()
-            if prox: var = fase2()
+            # Se aceitar continuar
+            if prox: var, pontos = fase2()
+            # Caso contrário volta para menu
             else: var = 0
         elif var == 3:
             prox = transicao()
+            # Se aceitar continuar
             if prox: var = fase3()
+            # Caso contrário volta para menu
             else: var = 0
         # Morreu
         elif var == -1:
