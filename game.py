@@ -39,13 +39,13 @@ def fases(var):
         elif var == 2:
             prox = transicao()
             # Se aceitar continuar
-            if prox: var, pontos = fase2()
+            if prox: var, pontos = fase2(pontos)
             # Caso contrário volta para menu
             else: var = 0
         elif var == 3:
             prox = transicao()
             # Se aceitar continuar
-            if prox: var = fase3()
+            if prox: var = fase3(pontos)
             # Caso contrário volta para menu
             else: var = 0
         # Morreu

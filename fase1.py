@@ -142,7 +142,7 @@ def fase1():
             return -1
 
         ## Proxima fase
-        if time >= 60:
+        if time >= 5:
             return 2, pontos
 
         janela.update()

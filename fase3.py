@@ -1,2 +1,2 @@
-def fase3():
+def fase3(pontos):
     return 0
