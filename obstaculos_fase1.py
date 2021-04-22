@@ -1,14 +1,15 @@
 from PPlay.window import *
 from PPlay.sprite import *
+from random import uniform
 from random import randint
 
 
 def asteroide(janela,time,lista_asteroide):
     
-    if time > randint(1,3):
+    if time > uniform(1,3):
 
         asteroide = Sprite(f"images/fase1/asteroide{randint(1,3)}.png")
-        asteroide.set_position(1281,randint(0 + asteroide.height,768- asteroide.height))
+        asteroide.set_position(1281,uniform(0 + asteroide.height,768- asteroide.height))
         lista_asteroide.append(asteroide)
         time = 0
 
@@ -27,10 +28,10 @@ def asteroide(janela,time,lista_asteroide):
 
 def satelites_on(janela, time, lista_satelite_on,lista_tiros):
 
-    if time > randint(2,4):
+    if time > uniform(2,4):
         satelite_on = Sprite("images/fase1/satellite_active.png")
 
-        satelite_on.set_position(1281,randint(0 + satelite_on.height,768- satelite_on.height-randint(0,satelite_on.height+30)))
+        satelite_on.set_position(1281,uniform(0 + satelite_on.height,768- satelite_on.height-uniform(0,satelite_on.height+30)))
 
         lista_satelite_on.append(satelite_on)
 
@@ -52,10 +53,10 @@ def satelites_on(janela, time, lista_satelite_on,lista_tiros):
 def satelites_off(janela, time, lista_obstaculos,lista_tiro):
         
         
-        if time > randint(3,5):
+        if time > uniform(3,5):
 
             satelite_off = Sprite("images/fase1/satellite_dead.png")
-            satelite_off.set_position(1281,randint(0 + satelite_off.height,768- satelite_off.height-80))
+            satelite_off.set_position(1281,uniform(0 + satelite_off.height,768- satelite_off.height-80))
             lista_obstaculos.append(satelite_off)
 
             time = 0

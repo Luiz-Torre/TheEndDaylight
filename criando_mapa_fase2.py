@@ -12,6 +12,7 @@ def criar(janela):
     while i < 74:
         if i % 5 == 0:
             i += 4
+            
         elif i % 6 == 0:
             i += 3
         else:

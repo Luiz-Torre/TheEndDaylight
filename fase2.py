@@ -7,7 +7,7 @@ from PPlay.collision import *
 #Inicialização
 
 #Corrigindo para a Amanda conseguir. PS: Python > C KKKKKKKK tlgd
-def fase2(pontos):
+def fase2(pontos,vida):
 
     janela = Window(1280,768)
     janela.set_title("Fase 2 - The End of Daylight")
@@ -36,7 +36,7 @@ def fase2(pontos):
     sair_pause.set_position(500,500)
 
     ## Player
-    vida, vida_list = 4, []
+    vida_list = []
     for vida_num in range(1,vida):
             vida_img = Sprite("images/fase1/vida.png")
             vida_img.set_position(vida_num*50,20)
@@ -50,7 +50,10 @@ def fase2(pontos):
     var = 1
     VelX= 90
     velY = 300
-    jump = False
+    jump = True
+
+    index = 0
+    time_anda = 0
 
     #Teste
     astronaut = []
@@ -59,124 +62,151 @@ def fase2(pontos):
         sprite_astrounaut.set_position(10, 720 - sprite_astrounaut.height)
         astronaut.append(sprite_astrounaut)
 
-    #var_anda = 0 --> sem uso
+    var_anda = 0
     count_chao = 0
 
+    evita_bug = 0
     while True:
 
-        ## Tela do Jogo
-        fundo.draw()
-        pause_icon.draw()
-        janela.draw_text(f"Tempo 00:{60-time}", 450, 20, size=45, color=(240,240,240), font_name="Computer_says_no")
-        janela.draw_text(f"Pontos {int(pontos)}", 650, 20, size=45, color=(240,240,240), font_name="Computer_says_no")
-        janela.draw_text(f"Fps: {fps_atual}", 800, 20, size=30, color=(240,240,240), font_name="Computer_says_no", italic=True)
-        
-        for vida_for in range(vida-1):
-            vida_list[vida_for].draw()
 
-        ## Pausa
-        if mouse.is_button_pressed(1) and mouse.is_over_object(pause_icon): 
-            var = 0
-
-        #Teste
-        velXmap = 125*janela.delta_time()         
-
-        ## FrameRate
-        cont += janela.delta_time()
-        fps += 1
-        if cont > 1:
-            time += 1
-            fps_atual = fps
-            cont,fps = 0, 0
-         
-        ## Movimentacao
-        if(teclado.key_pressed("RIGHT")):
-            if astronaut[0].x >= janela.width/2:
-                if fundo.x<= 0:
-                    fundo.move_x(-velXmap)
-                for a in lista_chao:
-                    a.move_x(-VelX*janela.delta_time()- VelX*janela.delta_time() )
-
-            else:        
-                fundo.move_x(-velXmap)
-                for a in lista_chao:
-                    a.move_x(-VelX*janela.delta_time())
-                astronaut[0].move_x(VelX*janela.delta_time())
-
-
-        if teclado.key_pressed("LEFT"): #movimenta_personagem.x > 0 --> não existe
-            astronaut[0].move_x(-VelX*janela.delta_time()*2)
-
-        ## Pulo 
-        # Obs: Mexi nele pois ao iniciar a fase o player estava morto, 
-        # mas não acho que seja a melhor forma de implementar
-
-        if teclado.key_pressed("UP"):
-            if not jump:
-                velY = 400
-                astronaut[0].move_y(-velY * janela.delta_time())
-            jump = True
-        
-
-        ## Plataforma
-        for chao_draw in lista_chao:
-            if chao_draw.x <= janela.width + 500:
-                chao_draw.draw()
-            if chao_draw.x <= 0 - chao_draw.width:
-                lista_chao.pop(lista_chao.index(chao_draw))
-
-
-        #for move_personagem in astronaut:
-        for chao_draw in range(len(lista_chao)):
-
-            if not Collision.collided_perfect(lista_chao[chao_draw],astronaut[0]):
-                count_chao += 1
-            else: 
-                jump = False
-                    
-        if count_chao >= len(lista_chao):
-            velY -= 100 * janela.delta_time()
-            astronaut[0].move_y(-velY * janela.delta_time())  
-            
-        count_chao = 0
-
-
-        ## Posição Astronaut
-        # for i in astronaut:
-        #     i.x = astronaut[0].x
-        #     i.y = astronaut[0].y
-        #     i.draw()
-        astronaut[0].draw()
-        if astronaut[0].y > janela.height:
-            astronaut[0].y = 720 - sprite_astrounaut.height
-            vida -= 1
-        
-        ## Gameover
-        if vida == 0:
-            return -1, pontos
-
-        ## Proxima fase
-        if time >= 60:
-            return 2, pontos
-        
-
-        janela.update()
-
-        ## TELA DE PAUSE
-        while var == 0:
-                
+            ## Tela do Jogo
             fundo.draw()
-            fundo_pause.draw()
-            continuar_pause.draw()
-            sair_pause.draw()
-            music_on_pause.draw()
-            som_on_pause.draw()
+            pause_icon.draw()
+            janela.draw_text(f"Tempo 00:{60-time}", 450, 20, size=45, color=(240,240,240), font_name="Computer_says_no")
+            janela.draw_text(f"Pontos {int(pontos)}", 650, 20, size=45, color=(240,240,240), font_name="Computer_says_no")
+            janela.draw_text(f"Fps: {fps_atual}", 800, 20, size=30, color=(240,240,240), font_name="Computer_says_no", italic=True)
+            
+            for vida_for in range(vida-1):
+                vida_list[vida_for].draw()
+
+            ## Pausa
+            if mouse.is_button_pressed(1) and mouse.is_over_object(pause_icon): 
+                var = 0
+
+            #Teste
+            velXmap = 125*janela.delta_time()         
+
+            ## FrameRate
+            cont += janela.delta_time()
+            fps += 1
+            if cont > 1:
+                time += 1
+                fps_atual = fps
+                cont,fps = 0, 0
+
+            time_anda += janela.delta_time()
+
+
+            if var_anda == 1 and time_anda >= 0.1:
+                index += 1
+
+                if index>5:
+                    index = 0    
+
+                time_anda = 0
+
+            elif var_anda ==0:
+                index = 5
+
+
+            astronaut[index].draw()
+
+            ## Movimentacao
+            if(teclado.key_pressed("RIGHT") and evita_bug >=1):
+                if astronaut[index].x >= janela.width/2:
+                    if fundo.x<= 0:
+                        fundo.move_x(-velXmap)
+                    for a in lista_chao:
+                        a.move_x(-VelX*janela.delta_time()- VelX*janela.delta_time() )
+            
+
+                else:        
+                    fundo.move_x(-velXmap)
+                    for a in lista_chao:
+                        a.move_x(-VelX*janela.delta_time())
+                    astronaut[index].move_x(VelX*janela.delta_time())
+            
+                var_anda = 1
+
+
+            elif teclado.key_pressed("LEFT") and astronaut[index].x > 0 and evita_bug >=1:
+                astronaut[index].move_x(-VelX*janela.delta_time()*2)
+
+            else:
+                var_anda = 0
+
+            if teclado.key_pressed("UP") and evita_bug >=1:
+                if jump == True:
+                    velY = 250
+                    astronaut[index].move_y(-velY * janela.delta_time())
+                    jump = False        
+            
+
+            ## Plataforma
+            for chao_draw in lista_chao:
+                if chao_draw.x <= janela.width + 500:
+                    chao_draw.draw()
+                if chao_draw.x <= 0 - chao_draw.width:
+                    lista_chao.pop(lista_chao.index(chao_draw))
+
+
+            #for move_personagem in astronaut:
+            for chao_draw in range(len(lista_chao)):
+
+                if not Collision.collided_perfect(lista_chao[chao_draw],astronaut[index]) or astronaut[index].y + 108> lista_chao[chao_draw].y+15:
+                    count_chao += 1
+
+                        
+            if count_chao >= len(lista_chao):
+                velY -= 100 * janela.delta_time()
+                astronaut[index].move_y(-velY * janela.delta_time())  
+                jump = False
+
+                
+            else:
+                jump = True
+
+            count_chao = 0
+
+            
+            if astronaut[index].y > janela.height and evita_bug >=1:
+                vida -= 1
+                return 2, pontos, vida
+
+
+
+            for setando_posicao in astronaut:
+                setando_posicao.set_position(astronaut[index].x,astronaut[index].y)
+
+            ## Gameover
+            if vida == 0:
+                return -1, pontos, vida
+
+            ## Proxima fase
+            if time >= 60:
+                return 2, pontos, vida
+            
+
+            if evita_bug < 1:
+                evita_bug += janela.delta_time()
 
             janela.update()
-            
-            if mouse.is_button_pressed(1):
-                if mouse.is_over_object(continuar_pause): 
-                    var = 1
 
-                if mouse.is_over_object(sair_pause):
-                    return 0, pontos
+            ## TELA DE PAUSE
+            while var == 0:
+                    
+                fundo.draw()
+                fundo_pause.draw()
+                continuar_pause.draw()
+                sair_pause.draw()
+                music_on_pause.draw()
+                som_on_pause.draw()
+
+                janela.update()
+                
+                if mouse.is_button_pressed(1):
+                    if mouse.is_over_object(continuar_pause): 
+                        var = 1
+
+                    if mouse.is_over_object(sair_pause):
+                        return 0, pontos

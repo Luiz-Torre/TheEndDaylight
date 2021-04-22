@@ -32,14 +32,15 @@ def transicao():
 
 def fases(var):
     pontos = 0
-
+    vida = 4
     while True:
         if var == 1:
             var, pontos = fase1()
-        elif var == 2:
             prox = transicao()
-            # Se aceitar continuar
-            if prox: var, pontos = fase2(pontos)
+
+
+        elif var == 2:
+            if prox: var, pontos, vida = fase2(pontos, vida)
             # Caso contrário volta para menu
             else: var = 0
         elif var == 3:
