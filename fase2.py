@@ -56,12 +56,17 @@ def fase2(pontos,vida):
     time_anda = 0
 
     #Teste
-    astronaut = []
+    astronaut = [[],[]]
     for x in range (1,7):
         sprite_astrounaut = Sprite(f"images/fase2/run_{x}.png")
         sprite_astrounaut.set_position(10, 720 - sprite_astrounaut.height)
-        astronaut.append(sprite_astrounaut)
+        astronaut[0].append(sprite_astrounaut)
 
+    for x in range (1,7):
+        sprite_astrounaut = Sprite(f"images/fase2/run_e{x}.png")
+        sprite_astrounaut.set_position(10, 720 - sprite_astrounaut.height)
+        astronaut[1].append(sprite_astrounaut)
+        
     var_anda = 0
     count_chao = 0
 
@@ -97,23 +102,11 @@ def fase2(pontos,vida):
             time_anda += janela.delta_time()
 
 
-            if var_anda == 1 and time_anda >= 0.1:
-                index += 1
-
-                if index>5:
-                    index = 0    
-
-                time_anda = 0
-
-            elif var_anda ==0:
-                index = 5
-
-
-            astronaut[index].draw()
+ 
 
             ## Movimentacao
             if(teclado.key_pressed("RIGHT") and evita_bug >=1):
-                if astronaut[index].x >= janela.width/2:
+                if astronaut[var_anda-1][index].x >= janela.width/2:
                     if fundo.x<= 0:
                         fundo.move_x(-velXmap)
                     for a in lista_chao:
@@ -124,23 +117,42 @@ def fase2(pontos,vida):
                     fundo.move_x(-velXmap)
                     for a in lista_chao:
                         a.move_x(-VelX*janela.delta_time())
-                    astronaut[index].move_x(VelX*janela.delta_time())
+                    astronaut[var_anda-1][index].move_x(VelX*janela.delta_time())
             
                 var_anda = 1
 
 
-            elif teclado.key_pressed("LEFT") and astronaut[index].x > 0 and evita_bug >=1:
-                astronaut[index].move_x(-VelX*janela.delta_time()*2)
-
+            elif teclado.key_pressed("LEFT") and astronaut[var_anda-1][index].x > 0 and evita_bug >=1:
+                astronaut[var_anda-1][index].move_x(-VelX*janela.delta_time()*2)
+                var_anda = 2
             else:
                 var_anda = 0
 
             if teclado.key_pressed("UP") and evita_bug >=1:
-                if jump == True:
-                    velY = 250
-                    astronaut[index].move_y(-velY * janela.delta_time())
-                    jump = False        
+                var_anda = 1
+                if jump:
+                    velY = 270
+                    astronaut[var_anda-1][index].move_y(-velY * janela.delta_time())
+                    jump = False  
             
+
+
+
+            if var_anda >= 1 and time_anda >= 0.1:
+                index += 1
+
+                if index>5:
+                    index = 0    
+
+                time_anda = 0
+
+            elif var_anda ==0:
+                index = 5
+                var_anda = 1 
+
+
+            astronaut[var_anda-1][index].draw()
+
 
             ## Plataforma
             for chao_draw in lista_chao:
@@ -153,13 +165,13 @@ def fase2(pontos,vida):
             #for move_personagem in astronaut:
             for chao_draw in range(len(lista_chao)):
 
-                if not Collision.collided_perfect(lista_chao[chao_draw],astronaut[index]) or astronaut[index].y + 108> lista_chao[chao_draw].y+15:
+                if not Collision.collided_perfect(lista_chao[chao_draw],astronaut[var_anda-1][index]) or astronaut[var_anda-1][index].y + 108> lista_chao[chao_draw].y+15:
                     count_chao += 1
 
                         
             if count_chao >= len(lista_chao):
-                velY -= 100 * janela.delta_time()
-                astronaut[index].move_y(-velY * janela.delta_time())  
+                velY -= 145 * janela.delta_time()
+                astronaut[var_anda-1][index].move_y(-velY * janela.delta_time())  
                 jump = False
 
                 
@@ -169,14 +181,15 @@ def fase2(pontos,vida):
             count_chao = 0
 
             
-            if astronaut[index].y > janela.height and evita_bug >=1:
+            if astronaut[var_anda-1][index].y > janela.height and evita_bug >=1:
                 vida -= 1
                 return 2, pontos, vida
 
 
 
-            for setando_posicao in astronaut:
-                setando_posicao.set_position(astronaut[index].x,astronaut[index].y)
+            for linha in astronaut:
+                for setando_posicao in linha:
+                    setando_posicao.set_position(astronaut[var_anda-1][index].x,astronaut[var_anda-1][index].y)
 
             ## Gameover
             if vida == 0:

@@ -36,7 +36,8 @@ def fases(var):
     while True:
         if var == 1:
             var, pontos = fase1()
-            prox = transicao()
+            if var == 2:
+                prox = transicao()
 
 
         elif var == 2:

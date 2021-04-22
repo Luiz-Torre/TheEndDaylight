@@ -139,10 +139,10 @@ def fase1():
 
         ## Gameover
         if vida == 0:
-            return -1
+            return -1, pontos
 
         ## Proxima fase
-        if time >= 60:
+        if time >= 1:
             return 2, pontos
 
         janela.update()
