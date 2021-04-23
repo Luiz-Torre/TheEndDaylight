@@ -34,7 +34,7 @@ def criar(janela):
             lista_acid.append(acid)
             i += 4
             
-        elif i % 6 == 0:
+        elif i % 4 == 0:
             valor = uniform(108*i+30,(108*(i+1)-50))
             for x in range (21,25):
                 obs_espinho = Sprite(f"images/fase2/obs{x}.png")

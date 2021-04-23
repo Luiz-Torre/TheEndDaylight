@@ -236,7 +236,7 @@ def fase2(pontos,vida):
                 return -1, pontos, vida
 
             ## Proxima fase
-            if time >= 120:
+            if time >= 60:
                 return 2, pontos, vida
             
 

@@ -31,4 +31,3 @@ while True:
 
     elif var_global == 6:
         var_global = creditos()
- 
