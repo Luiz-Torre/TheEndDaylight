@@ -4,6 +4,26 @@ from fase1 import fase1
 from fase2 import fase2
 from fase3 import fase3
 
+def ini(janela, level):
+    mouse = Window.get_mouse()
+    fundo = GameImage(f"images/tela_geral/inifase{level}.png")
+    click = 0
+
+    while True:
+        fundo.draw()
+        aceitar.draw()
+        recusar.draw()
+        
+        click += janela.delta_time()
+
+        if click > 1 and mouse.is_button_pressed(1): 
+            if mouse.is_over_object(aceitar):
+                return True
+            if mouse.is_over_object(recusar):
+                return False
+        janela.update()
+
+
 def transicao(level):
     janela = Window(1280,768)
     janela.set_title("Missao Concluida - The End of Daylight")
