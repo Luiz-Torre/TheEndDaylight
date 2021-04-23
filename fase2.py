@@ -4,6 +4,7 @@ from PPlay.gameimage import *
 from PPlay.sprite import *
 import criando_mapa_fase2
 from PPlay.collision import *
+from PPlay.sound import *
 #Inicialização
 
 #Corrigindo para a Amanda conseguir. PS: Python > C KKKKKKKK tlgd
@@ -54,8 +55,8 @@ def fase2(pontos,vida):
 
     index = 0
     time_anda = 0
-    som = Sound("sounds/Música de Suspense para Fundo de Vídeos 1 - Sem Direitos Autorais_160k.ogg")
-    som.set_volume(90)
+    som3 = Sound("sounds/Música de Suspense para Fundo de Vídeos 1 - Sem Direitos Autorais_160k.ogg")
+    som3.set_volume(90)
     #Teste
     astronaut = [[],[]]
     for x in range (1,7):
@@ -82,7 +83,9 @@ def fase2(pontos,vida):
             janela.draw_text(f"Tempo 00:{60-time}", 450, 20, size=45, color=(240,240,240), font_name="Computer_says_no")
             janela.draw_text(f"Pontos {int(pontos)}", 650, 20, size=45, color=(240,240,240), font_name="Computer_says_no")
             janela.draw_text(f"Fps: {fps_atual}", 800, 20, size=30, color=(240,240,240), font_name="Computer_says_no", italic=True)
-            
+
+            som3.play()
+
             for vida_for in range(vida-1):
                 vida_list[vida_for].draw()
 
@@ -231,6 +234,8 @@ def fase2(pontos,vida):
 
             ## Gameover
             if vida == 0 or time >= 60: # and not colided com nave no final
+                som3.stop()
+
                 return -1, pontos, vida
 
             ## Proxima fase
@@ -260,4 +265,6 @@ def fase2(pontos,vida):
                         var = 1
 
                     if mouse.is_over_object(sair_pause):
+                        som.stop()
+
                         return 0, pontos, vida

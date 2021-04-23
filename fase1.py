@@ -27,8 +27,8 @@ def fase1():
     pause_icon.set_position(1280-pause_icon.width-30,10)
 
 
-    som = Sound("sounds/Back to the Future with composer Alan Silvestri conducting in Vienna!_160k.ogg")
-    som.set_volume(80)
+    som2 = Sound("sounds/Back to the Future with composer Alan Silvestri conducting in Vienna!_160k.ogg")
+    som2.set_volume(100)
 
 
     nave = Sprite("images/fase1/ship.gif")
@@ -150,15 +150,14 @@ def fase1():
 
         ## Proxima fase
         if time >= 60:
-            som.stop()
+            som2.pause()
+            som2.stop()
+            
 
             return 2, pontos
        
-        
-        if pausa_som:
-            som.play()
-        else:
-            som.pause()
+        som2.play()
+ 
 
         janela.update() 
 
@@ -182,14 +181,14 @@ def fase1():
 
                 if mouse.is_over_object(sair_pause):
                     return 0, pontos
-                if mouse.is_over_object(music_on_pause) and som.is_playing():
-                    som.pause()
-                    pausa_som = False
-                if mouse.is_over_object(music_on_pause) and not som.is_playing():
-                    som.unpause()
-                    som.play()
+                # if mouse.is_over_object(music_on_pause) and som.is_playing():
+                #     som.pause()
+                #     pausa_som = False
+                # if mouse.is_over_object(music_on_pause) and not som.is_playing():
+                #     som.unpause()
+                #     som.play()
 
-                    pausa_som = True
+                #     pausa_som = True
 
             
 

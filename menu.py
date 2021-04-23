@@ -25,6 +25,7 @@ def menu_inicial():
 
     #Game Loop
     while True:
+
         fundo_menu.draw()
         btn_jogar.draw()
         btn_creditos.draw()
@@ -34,11 +35,12 @@ def menu_inicial():
 
         if click > 1 and mouse.is_button_pressed(1):
             click = 0
-            if mouse.is_over_object(btn_jogar): 
+            if mouse.is_over_object(btn_jogar):
+                som.pause()
                 som.stop()
-
                 return 1
 
+            
             if mouse.is_over_object(btn_creditos):
                 return 6
 
@@ -46,6 +48,5 @@ def menu_inicial():
                 return 3   
 
         som.play()
-
         janela.update()
     
