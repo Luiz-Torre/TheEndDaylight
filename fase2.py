@@ -206,7 +206,7 @@ def fase2(pontos,vida):
 
             count_chao = 0
 
-            if time_esp >= 0.2:
+            if time_esp >= 0.5:
                 var_espinho += 1
                 if var_espinho > len(matriz_obs[0]) -1:
                     var_espinho = 0
@@ -222,7 +222,7 @@ def fase2(pontos,vida):
                 if linha[var_espinho].x <= 0 - linha[var_espinho].width:
                     matriz_obs.pop(matriz_obs.index(linha))
                     
-                if Collision.collided_perfect(astronaut[var_anda-1][index],linha[var_espinho]) and evita_bug >=1:
+                if Collision.collided_perfect(astronaut[var_anda-1][index],linha[var_espinho]) and evita_bug >=1 and var_espinho != 0:
                     vida -= 1
                     return 2, pontos, vida
 
