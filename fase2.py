@@ -150,14 +150,12 @@ def fase2(pontos,vida):
             
 
             if var_anda >= 1 and time_anda >= 0.1:
+
                 index += 1
-
-                if index>5:
-                    index = 0    
-
                 time_anda = 0
+                if index > 5: index = 0    
 
-            elif var_anda ==0:
+            elif var_anda == 0:
                 index = 5
                 var_anda = 1 
 
@@ -175,6 +173,7 @@ def fase2(pontos,vida):
                 if acid_draw.x <= 0 - acid_draw.width:
                     lista_acid.pop(lista_acid.index(acid_draw))
                     
+                ## Perda de vida e fase é reiniciada
                 if Collision.collided_perfect(astronaut[var_anda-1][index],acid_draw) and evita_bug >=1:
                     vida -= 1
                     return 2, pontos, vida
@@ -188,7 +187,7 @@ def fase2(pontos,vida):
                     lista_chao.pop(lista_chao.index(chao_draw))
 
             
-            #for move_personagem in astronaut:
+            # Movimentação do chão
             for chao_draw in range(len(lista_chao)):
 
                 if not Collision.collided_perfect(lista_chao[chao_draw],astronaut[var_anda-1][index]) or astronaut[var_anda-1][index].y + 108> lista_chao[chao_draw].y+15:
@@ -199,20 +198,18 @@ def fase2(pontos,vida):
                 velY -= 150 * janela.delta_time()
                 astronaut[var_anda-1][index].move_y(-velY * janela.delta_time())  
                 jump = False
-
-                
             else:
                 jump = True
 
             count_chao = 0
 
+            #Sprite de espinhos
             if time_esp >= 0.2:
                 var_espinho += 1
-                if var_espinho > len(matriz_obs[0]) -1:
-                    var_espinho = 0
-
                 time_esp = 0  
 
+                if var_espinho > len(matriz_obs[0]) -1: var_espinho = 0
+                
 
 
             for linha in matriz_obs:
@@ -232,12 +229,12 @@ def fase2(pontos,vida):
 
 
             ## Gameover
-            if vida == 0:
+            if vida == 0 or time >= 60: # and not colided com nave no final
                 return -1, pontos, vida
 
             ## Proxima fase
-            if time >= 60:
-                return 2, pontos, vida
+            # if colided com nave no final
+            #     return 3, pontos, vida
             
 
             if evita_bug < 1:

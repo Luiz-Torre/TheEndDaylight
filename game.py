@@ -4,7 +4,7 @@ from fase1 import fase1
 from fase2 import fase2
 from fase3 import fase3
 
-def transicao():
+def transicao(level):
     janela = Window(1280,768)
     janela.set_title("Missao Concluida - The End of Daylight")
     mouse = Window.get_mouse()
@@ -37,7 +37,7 @@ def fases(var):
         if var == 1:
             var, pontos = fase1()
             if var == 2:
-                prox = transicao()
+                prox = transicao(var)
 
 
         elif var == 2:
@@ -45,7 +45,7 @@ def fases(var):
             # Caso contrário volta para menu
             else: var = 0
         elif var == 3:
-            prox = transicao()
+            prox = transicao(var)
             # Se aceitar continuar
             if prox: var = fase3(pontos)
             # Caso contrário volta para menu
