@@ -54,7 +54,8 @@ def fase2(pontos,vida):
 
     index = 0
     time_anda = 0
-
+    som = Sound("sounds/Música de Suspense para Fundo de Vídeos 1 - Sem Direitos Autorais_160k.ogg")
+    som.set_volume(90)
     #Teste
     astronaut = [[],[]]
     for x in range (1,7):

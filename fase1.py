@@ -4,6 +4,8 @@ from PPlay.sprite import *
 import nave_geral
 import obstaculos_fase1
 import colisoes_fase1
+from PPlay.sound import *
+
 from fase2 import fase2
 #Inicialização
 
@@ -23,6 +25,11 @@ def fase1():
 
     pause_icon = Sprite("images/pause/pause_icon.png")
     pause_icon.set_position(1280-pause_icon.width-30,10)
+
+
+    som = Sound("sounds/Back to the Future with composer Alan Silvestri conducting in Vienna!_160k.ogg")
+    som.set_volume(80)
+
 
     nave = Sprite("images/fase1/ship.gif")
 
@@ -63,6 +70,7 @@ def fase1():
     temp_tiro, temp_asteroide, temp_satelite_off,temp_satelite_on = 0, 0, 0, 0
     time, vida = 0, 4
 
+    pausa_som = True
     while True:
         ## FrameRate
         cont += janela.delta_time()
@@ -135,17 +143,24 @@ def fase1():
 
         ## Voltando para o menu
         if teclado.key_pressed("ESC"):
-            exit()
-
+            return 0, pontos
         ## Gameover
         if vida == 0:
             return -1, pontos
 
         ## Proxima fase
-        if time >= 1:
-            return 2, pontos
+        if time >= 60:
+            som.stop()
 
-        janela.update()
+            return 2, pontos
+       
+        
+        if pausa_som:
+            som.play()
+        else:
+            som.pause()
+
+        janela.update() 
 
         ## TELA DE PAUSE
         while var == 0:
@@ -166,8 +181,15 @@ def fase1():
                     var = 1
 
                 if mouse.is_over_object(sair_pause):
-                    return 0
+                    return 0, pontos
+                if mouse.is_over_object(music_on_pause) and som.is_playing():
+                    som.pause()
+                    pausa_som = False
+                if mouse.is_over_object(music_on_pause) and not som.is_playing():
+                    som.unpause()
+                    som.play()
 
+                    pausa_som = True
 
             
 
