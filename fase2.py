@@ -203,12 +203,8 @@ def fase2(pontos,vida):
 
             count_chao = 0
 
-<<<<<<< HEAD
-            #Sprite de espinhos
-            if time_esp >= 0.2:
-=======
+            #Sprite de espinho
             if time_esp >= 0.5:
->>>>>>> fff71113b798656a855515072298a1ca670b0b76
                 var_espinho += 1
                 time_esp = 0  
 
@@ -263,4 +259,4 @@ def fase2(pontos,vida):
                         var = 1
 
                     if mouse.is_over_object(sair_pause):
-                        return 0, pontos
+                        return 0, pontos, vida

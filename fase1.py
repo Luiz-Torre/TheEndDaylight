@@ -142,7 +142,7 @@ def fase1():
             return -1, pontos
 
         ## Proxima fase
-        if time >= 1:
+        if time >= 60:
             return 2, pontos
 
         janela.update()
@@ -166,7 +166,7 @@ def fase1():
                     var = 1
 
                 if mouse.is_over_object(sair_pause):
-                    return 0
+                    return 0, pontos
 
 
             

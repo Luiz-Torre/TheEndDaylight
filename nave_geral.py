@@ -33,24 +33,19 @@ def tiro(janela,nave_sprite,lista,temp,vel_tiro):
 
     while True:
 
-            
-
-        if(teclado.key_pressed("SPACE") and temp > 0.5):
+        if teclado.key_pressed("SPACE") and temp > 0.5:
 
             tiro  = Sprite("images/fase1/shot.png",5)
-            tiro.set_position(nave_sprite.x + 60, nave_sprite.y-37)
-            tiro.set_total_duration(2000)
+            tiro.set_position(nave_sprite.x + 100, nave_sprite.y -10)
+            tiro.set_total_duration(1700)
             lista.append(tiro)
             temp = 0
-
 
         for A in lista:
                 if A.x < janela.width:
                     A.move_x(vel_tiro)
                     A.update()
                     A.draw()
-
-
                 else:
                     lista.pop(lista.index(A))
        
