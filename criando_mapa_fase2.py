@@ -9,6 +9,8 @@ def criar(janela):
     lista_acid = []
     matriz_obs = []
     lista_obs = []
+    matriz_det = []
+    lista_det = []
 
     chao = Sprite("images/fase2/chao_azul_pequeno.png")
     chao.set_position(0,janela.height - chao.height+15)
@@ -47,8 +49,8 @@ def criar(janela):
             lista_acid.append(acid)
             i += 3
         else:
-
-            if randint(1,3) == 2 and i!= 1:
+            var_cria =randint(1,3)
+            if var_cria == 2 and i!= 1:
                 valor = uniform(108*i+30,(108*(i+1)-50))
                 for x in range (21,25):
                     obs_espinho = Sprite(f"images/fase2/obs{x}.png")
@@ -56,6 +58,13 @@ def criar(janela):
                     lista_obs.append(obs_espinho)
             
                 matriz_obs.append(lista_obs)
+
+            if var_cria == 3 or var_cria == 1 and i!= 1:
+                valor = uniform(108*i+30,(108*(i+1)-50))
+                det = Sprite(f"images/fase2/det2.png")
+                det.set_position(valor, janela.height - chao.height-60)
+                lista_det.append(det)
+            
             i += 1
 
 
@@ -66,4 +75,4 @@ def criar(janela):
         
         
     
-    return lista_chao, lista_acid, matriz_obs
+    return lista_chao, lista_acid, matriz_obs, lista_det

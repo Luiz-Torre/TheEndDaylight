@@ -35,7 +35,7 @@ def fase2(pontos,vida):
 
     sair_pause = Sprite("images/pause/sair.png")
     sair_pause.set_position(500,500)
-
+    lista_det = []
     ## Player
     vida_list = []
     for vida_num in range(1,vida):
@@ -43,7 +43,7 @@ def fase2(pontos,vida):
             vida_img.set_position(vida_num*50,20)
             vida_list.append(vida_img)
 
-    lista_chao, lista_acid, matriz_obs = criando_mapa_fase2.criar(janela)
+    lista_chao, lista_acid, matriz_obs, lista_det = criando_mapa_fase2.criar(janela)
     time = 0
     cont = 0
     fps = 0
@@ -118,6 +118,8 @@ def fase2(pontos,vida):
                         a.move_x(-VelX*janela.delta_time()- VelX*janela.delta_time())
                     for a in lista_acid:
                         a.move_x(-VelX*janela.delta_time()- VelX*janela.delta_time())
+                    for a in lista_det:
+                        a.move_x(-VelX*janela.delta_time()- VelX*janela.delta_time())
                     for linha in matriz_obs:
                         for a in linha:
                             a.move_x(-VelX*janela.delta_time()- VelX*janela.delta_time())
@@ -127,6 +129,8 @@ def fase2(pontos,vida):
                     for a in lista_chao:
                         a.move_x(-VelX*janela.delta_time())
                     for a in lista_acid:
+                        a.move_x(-VelX*janela.delta_time())
+                    for a in lista_det:
                         a.move_x(-VelX*janela.delta_time())
                     for linha in matriz_obs:
                         for a in linha:
@@ -230,6 +234,17 @@ def fase2(pontos,vida):
 
             time_esp += janela.delta_time()
 
+            for object in lista_det:
+
+                if object.x <= janela.width + 50:
+                    object.draw()
+
+                if object.x <= 0 - object.width:
+                    lista_det.pop(lista_det.index(object))
+                    
+                if Collision.collided_perfect(astronaut[var_anda-1][index],object) and evita_bug >=1:
+                    pontos += 500
+                    lista_det.pop(lista_det.index(object))
 
 
             ## Gameover
