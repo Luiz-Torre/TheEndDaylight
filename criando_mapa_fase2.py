@@ -58,7 +58,7 @@ def criar(janela):
                     lista_obs.append(obs_espinho)
             
                 matriz_obs.append(lista_obs)
-
+#
             if var_cria == 3 or var_cria == 1 and i!= 1:
                 valor = uniform(108*i+30,(108*(i+1)-50))
                 det = Sprite(f"images/fase2/det2.png")
