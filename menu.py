@@ -13,7 +13,7 @@ def menu_inicial():
     btn_comandos = GameImage("images/menu/comandos.png")
     btn_creditos = GameImage("images/menu/creditos.png")
     som = Sound("sounds/menu.ogg")
-    som.set_volume(100)
+    som.set_volume(70)
 
     btn_jogar.set_position((janela.width)/2 - (btn_jogar.width)/2, janela.height -btn_comandos.height+55)
     btn_creditos.set_position(0, janela.height - btn_creditos.height+30)

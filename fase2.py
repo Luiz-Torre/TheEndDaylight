@@ -184,7 +184,7 @@ def fase2(pontos,vida):
                 ## Perda de vida e fase é reiniciada
                 if Collision.collided_perfect(astronaut[var_anda-1][index],acid_draw) and evita_bug >=1:
                     vida -= 1
-                    return 2, pontos, vida
+                    #return 2, pontos, vida
 
             
             ## Plataforma
@@ -229,7 +229,7 @@ def fase2(pontos,vida):
                     
                 if Collision.collided_perfect(astronaut[var_anda-1][index],linha[var_espinho]) and evita_bug >=1 and var_espinho != 0:
                     vida -= 1
-                    return 2, pontos, vida
+                    #return 2, pontos, vida
 
 
             time_esp += janela.delta_time()
@@ -251,7 +251,7 @@ def fase2(pontos,vida):
             if vida == -10 or time >= 300: # and not colided com nave no final
                 som3.stop()
 
-                return -1, pontos, vida
+                #return -1, pontos, vida
 
             ## Proxima fase
             # if colided com nave no final
