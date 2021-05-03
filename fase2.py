@@ -191,8 +191,12 @@ def fase2(pontos,vida):
             for chao_draw in lista_chao:
                 if chao_draw.x <= janela.width + 50:
                     chao_draw.draw()
-                if chao_draw.x <= 0 - chao_draw.width:
+                elif chao_draw.x <= 0 - chao_draw.width:
                     lista_chao.pop(lista_chao.index(chao_draw))
+            
+            if lista_chao[-1].x < janela.width :
+                nave_fase2.set_position(lista_chao[-1].x + 40, 510)
+                nave_fase2.draw()
 
             
             # Movimentação do chão
@@ -261,7 +265,6 @@ def fase2(pontos,vida):
             if evita_bug < 1:
                 evita_bug += janela.delta_time()
             
-            nave_fase2.draw()
             janela.update()
 
             ## TELA DE PAUSE

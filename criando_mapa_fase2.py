@@ -80,7 +80,6 @@ def criar(janela):
         lista_chao.append(chao)
 
     nave_fase2 = Sprite("images/fase2/nave_2.png")
-    nave_fase2.set_position(108*i,510)
         
     
     return lista_chao, lista_acid, matriz_obs, lista_det, nave_fase2
