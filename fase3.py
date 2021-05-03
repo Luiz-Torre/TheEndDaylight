@@ -2,10 +2,8 @@ from PPlay.window import *
 from PPlay.gameimage import *
 from PPlay.sprite import *
 import nave_geral
-import obstaculos_fase1
-import colisoes_fase1
 from PPlay.sound import *
-
+import colisaofase3
 from fase2 import fase2
 #Inicialização
 
@@ -64,9 +62,10 @@ def fase3(pontos,vida):
         vida_list.append(vida_img)
 
     #variáveis
-    temp_tiro, temp_inimigo_nave= 0, 0
+    temp_tiro, temp_inimigo_nave, time_tiro_enemy= 0, 0, 0
     time, vida = 0, 4
 
+    lista = []
     pausa_som = True
     while True:
         ## FrameRate
@@ -112,20 +111,28 @@ def fase3(pontos,vida):
         ## Variáveis de tempo
         temp_tiro += janela.delta_time()
         temp_inimigo_nave += janela.delta_time()
-        
+        time_tiro_enemy += janela.delta_time()
 
 
         ## Setando tiros na tela
         lista_tiro,temp_tiro = nave_geral.tiro(janela,nave,lista_tiro,temp_tiro,vel_tiro)
 
-        ## Setando obstáculos na tela
+        lista_nave_inimigas,temp_tiro,lista_tiro,pontos, time_tiro_enemy,lista,vida= nave_geral.inimigo(janela,lista_nave_inimigas,temp_tiro,lista_tiro,pontos,time_tiro_enemy,lista,vel_tiro,nave,vida)
 
+        lista, vida, time_tiro_enemy = colisaofase3.tiro_inimigo(janela,lista_nave_inimigas,time_tiro_enemy,lista,vel_tiro,nave,vida)
 
-        ## Colisões por tiros
-        
+        for shot in lista:
+            shot.update()
+            shot.draw()
+            if shot.x < janela.width:
+                        shot.move_x(-vel_tiro)
 
-        ## Colisões com obstáculos
-
+            else:
+                lista.pop(lista.index(shot))
+            
+            # if shot.y< nave.y + nave.height-40 and shot.y> nave.y and shot.x <nave.x + nave.width:
+            #     vida -= 1
+            #     lista.pop(lista.index(shot))
 
         ## Desenhando vida
         for vida_for in range(vida-1):

@@ -198,7 +198,7 @@ def fase2(pontos,vida):
                 nave_fase2.set_position(lista_chao[-1].x + 120, 480)
                 nave_fase2.draw()
 
-            if Collision.collided_perfect(nave_fase2,astronaut[var_anda-1][index]):
+            if not Collision.collided_perfect(nave_fase2,astronaut[var_anda-1][index]):
                 return 3, pontos, vida
 
             # Movimentação do chão
