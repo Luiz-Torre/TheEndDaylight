@@ -52,8 +52,7 @@ def transicao(level):
                 return False
         janela.update()
 
-def fases(var):
-    vida = 4
+def fases(var,vida):
     
     while True:
         
@@ -75,7 +74,7 @@ def fases(var):
         elif var == 3:
             prox = transicao(var)
             # Se aceitar continuar
-            if prox: var = fase3(pontos)
+            if prox: var = fase3(pontos, vida)
             # Caso contrário volta para menu
             else: var = 0
         

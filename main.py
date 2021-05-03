@@ -11,13 +11,15 @@ from tela_gameover import morreu
 var_global = 0 
 
 while True:
+    vida = 4
+
     if var_global == 0:
         var_global = menu_inicial()
         
 
     elif var_global == 1:
 
-        var_global = fases(var_global)
+        var_global = fases(var_global, vida)
 
     elif var_global == 2:
         var_global = morreu(var_global)
