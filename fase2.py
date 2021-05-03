@@ -195,10 +195,12 @@ def fase2(pontos,vida):
                     lista_chao.pop(lista_chao.index(chao_draw))
             
             if lista_chao[-1].x < janela.width :
-                nave_fase2.set_position(lista_chao[-1].x + 40, 510)
+                nave_fase2.set_position(lista_chao[-1].x + 120, 480)
                 nave_fase2.draw()
 
-            
+            if Collision.collided_perfect(nave_fase2,astronaut[var_anda-1][index]):
+                return 3, pontos, vida
+
             # Movimentação do chão
             for chao_draw in range(len(lista_chao)):
 
@@ -233,7 +235,7 @@ def fase2(pontos,vida):
                     
                 if Collision.collided_perfect(astronaut[var_anda-1][index],linha[var_espinho]) and evita_bug >=1 and var_espinho != 0:
                     vida -= 1
-                    #return 2, pontos, vida
+                    return 2, pontos, vida
 
 
             time_esp += janela.delta_time()
@@ -252,10 +254,10 @@ def fase2(pontos,vida):
 
 
             ## Gameover
-            if vida == -10 or time >= 300: # and not colided com nave no final
+            if vida == 0 or time >= 60: # and not colided com nave no final
                 som3.stop()
 
-                #return -1, pontos, vida
+                return -1, pontos, vida
 
             ## Proxima fase
             # if colided com nave no final
