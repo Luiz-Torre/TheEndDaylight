@@ -43,7 +43,7 @@ def fase2(pontos,vida):
             vida_img.set_position(vida_num*50,20)
             vida_list.append(vida_img)
 
-    lista_chao, lista_acid, matriz_obs, lista_det = criando_mapa_fase2.criar(janela)
+    lista_chao, lista_acid, matriz_obs, lista_det, nave_fase2 = criando_mapa_fase2.criar(janela)
     time = 0
     cont = 0
     fps = 0
@@ -248,7 +248,7 @@ def fase2(pontos,vida):
 
 
             ## Gameover
-            if vida == 0 or time >= 60: # and not colided com nave no final
+            if vida == -10 or time >= 300: # and not colided com nave no final
                 som3.stop()
 
                 return -1, pontos, vida
@@ -260,7 +260,8 @@ def fase2(pontos,vida):
 
             if evita_bug < 1:
                 evita_bug += janela.delta_time()
-
+            
+            nave_fase2.draw()
             janela.update()
 
             ## TELA DE PAUSE
@@ -280,6 +281,6 @@ def fase2(pontos,vida):
                         var = 1
 
                     if mouse.is_over_object(sair_pause):
-                        som.stop()
+                        # som.stop()
 
                         return 0, pontos, vida
