@@ -17,8 +17,8 @@ def fase3(pontos,vida):
     fundo = Sprite("images/fase3/background3.png")
     fundo.set_position(0,0)
 
-    fundo2= Sprite("images/fase3/backgroun3.png")
-    fundo2.set_position(1280,0)
+    fundo2= Sprite("images/fase3/background3.png")
+    fundo2.set_position(1152,0)
 
     pause_icon = Sprite("images/pause/pause_icon.png")
     pause_icon.set_position(1280-pause_icon.width-30,10)
@@ -51,6 +51,7 @@ def fase3(pontos,vida):
     ## Variáveis
     nave.set_position(50,janela.height/2)
     cont,fps, fps_atual = 0, 0, 0
+    inimigo = 1
     lista_nave_inimigas = []
     lista_tiro = []
     vida_list = []
@@ -78,17 +79,17 @@ def fase3(pontos,vida):
             cont,fps = 0, 0
 
         ## Deslocamento de fundo
-        vel_fundo = 0.2
+        vel_fundo = 0.5
 
         if  fundo.x+fundo.width>=0:
             fundo.move_x(-vel_fundo)  
         else:
-            fundo.set_position(1280,0)
+            fundo.set_position(1152,0)
 
         if  fundo2.x+fundo2.width>=0:
             fundo2.move_x(-vel_fundo)  
         else:
-            fundo2.set_position(1280,0)
+            fundo2.set_position(1152,0)
         
         ## Desenhando tela do jogo
         fundo.draw()
@@ -114,26 +115,25 @@ def fase3(pontos,vida):
         temp_inimigo_nave += janela.delta_time()
         time_tiro_enemy += janela.delta_time()
 
+        if time == 30 or time == 50:
+            inimigo += 1
 
         ## Setando tiros na tela
         lista_tiro,temp_tiro = nave_geral.tiro(janela,nave,lista_tiro,temp_tiro,vel_tiro)
 
-        lista_nave_inimigas,temp_tiro,lista_tiro,pontos, time_tiro_enemy,lista,vida= nave_geral.inimigo(janela,lista_nave_inimigas,temp_tiro,lista_tiro,pontos,time_tiro_enemy,lista,vel_tiro,nave,vida)
+        lista_nave_inimigas,temp_tiro,lista_tiro,pontos, time_tiro_enemy,lista,vida = nave_geral.inimigo(janela,lista_nave_inimigas,temp_tiro,lista_tiro,pontos,time_tiro_enemy,lista,vel_tiro,nave,vida, inimigo)
 
-        lista, vida, time_tiro_enemy = colisaofase3.tiro_inimigo(janela,lista_nave_inimigas,time_tiro_enemy,lista,vel_tiro,nave,vida)
+        lista, vida, time_tiro_enemy = colisaofase3.tiro_inimigo(janela,lista_nave_inimigas,time_tiro_enemy,lista,vel_tiro,nave,vida, inimigo)
 
         for shot in lista:
             shot.update()
             shot.draw()
             if shot.x < janela.width:
-                        shot.move_x(-vel_tiro)
+                shot.move_x(-vel_tiro)
 
             else:
                 lista.pop(lista.index(shot))
             
-            # if shot.y< nave.y + nave.height-40 and shot.y> nave.y and shot.x <nave.x + nave.width:
-            #     vida -= 1
-            #     lista.pop(lista.index(shot))
 
         ## Desenhando vida
         for vida_for in range(vida-1):
@@ -151,7 +151,7 @@ def fase3(pontos,vida):
             som2.pause()
             som2.stop()
             
-            return 2, pontos
+            return 4, pontos
     
         som2.play()
 

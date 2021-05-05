@@ -54,35 +54,30 @@ def tiro(janela,nave_sprite,lista,temp,vel_tiro):
        
         return lista,temp
 
-def inimigo(janela,lista_nave_inimigas,time,lista_tiro,pontos,time_tiro_enemy,lista,vel_tiro,nave,vida):
-    if time >= 3:
-        nave_inimiga_sprite = Sprite("images/fase3/Ship1.png")
+def inimigo(janela,lista_nave_inimigas,time,lista_tiro,pontos,time_tiro_enemy,lista,vel_tiro,nave,vida, i):
+    if time >= 2:
+        nave_inimiga_sprite = Sprite(f"images/fase3/Ship{i}.png")
         nave_inimiga_sprite.set_position(1281+ randint(200,250),uniform(0,768- nave_inimiga_sprite.height-70))
         lista_nave_inimigas.append(nave_inimiga_sprite)
         time = 0
 
 
-    
     for A in lista_nave_inimigas:
         if A.x > -100:
             vel = 230*janela.delta_time()
             A.move_x(-vel)
 
             A.draw()
-
         else:
             lista_nave_inimigas.pop(lista_nave_inimigas.index(A))
         
 
-        if lista_tiro != []:
+        if lista_tiro:
             for B in lista_tiro:
-                        if B.y > A.y- A.height-15 and B.y < A.y and B.x >= A.x-A.width/2 and B.x<A.x:
-                            lista_nave_inimigas.pop(lista_nave_inimigas.index(A))
-                            lista_tiro.pop(lista_tiro.index(B))
-                            pontos += 1250
-
-
-
+                if B.y > A.y- A.height-15 and B.y < A.y and B.x >= A.x-A.width/2 and B.x<A.x:
+                    lista_nave_inimigas.pop(lista_nave_inimigas.index(A))
+                    lista_tiro.pop(lista_tiro.index(B))
+                    pontos += 1250
 
     return lista_nave_inimigas,time,lista_tiro,pontos, time_tiro_enemy,lista,vida
 
