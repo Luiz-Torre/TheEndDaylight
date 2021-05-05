@@ -83,7 +83,7 @@ def inimigo(janela,lista_nave_inimigas,time,lista_tiro,pontos,time_tiro_enemy,li
                 if unbounded_collision.UnboundedCollision.pixel_collision(B.rect, A.rect, surface, A.image):
                     lista_nave_inimigas.pop(lista_nave_inimigas.index(A))
                     lista_tiro.pop(lista_tiro.index(B))
-                    pontos += 1250
+                    pontos += 1200 + 50*i
 
     return lista_nave_inimigas,time,lista_tiro,pontos, time_tiro_enemy,lista,vida
 
