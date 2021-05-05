@@ -14,10 +14,10 @@ def fase3(pontos,vida):
     teclado = Window.get_keyboard()
     mouse = Window.get_mouse()
 
-    fundo = Sprite("images/fase3/fundo.png")
+    fundo = Sprite("images/fase3/background3.png")
     fundo.set_position(0,0)
 
-    fundo2= Sprite("images/fase3/fundo.png")
+    fundo2= Sprite("images/fase3/backgroun3.png")
     fundo2.set_position(1280,0)
 
     pause_icon = Sprite("images/pause/pause_icon.png")
@@ -67,6 +67,7 @@ def fase3(pontos,vida):
 
     lista = []
     pausa_som = True
+
     while True:
         ## FrameRate
         cont += janela.delta_time()
@@ -150,7 +151,6 @@ def fase3(pontos,vida):
             som2.pause()
             som2.stop()
             
-
             return 2, pontos
     
         som2.play()

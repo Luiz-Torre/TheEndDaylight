@@ -78,6 +78,9 @@ def fases(var,vida):
             # Caso contrário volta para menu
             else: var = 0
         
+        elif var == 4:
+            transicao(var)
+        
         # Morreu
         elif var == -1:
             return 2

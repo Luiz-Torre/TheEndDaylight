@@ -39,9 +39,9 @@ def fase2(pontos,vida):
     ## Player
     vida_list = []
     for vida_num in range(1,vida):
-            vida_img = Sprite("images/fase1/vida.png")
-            vida_img.set_position(vida_num*50,20)
-            vida_list.append(vida_img)
+        vida_img = Sprite("images/fase1/vida.png")
+        vida_img.set_position(vida_num*50,20)
+        vida_list.append(vida_img)
 
     lista_chao, lista_acid, matriz_obs, lista_det, nave_fase2 = criando_mapa_fase2.criar(janela)
     time = 0
