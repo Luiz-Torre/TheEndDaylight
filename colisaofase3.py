@@ -21,11 +21,7 @@ def tiro_inimigo(janela,lista_nave_inimigas,time_tiro_enemy,lista,vel_tiro,nave,
         for B in lista:
             crop_rect = pygame.Rect((B.curr_frame * B.width,0),(B.width,B.height))
             surface = pygame.Surface((B.width,B.height))
-            #surface.fill((100, 100, 100))
-            surface.convert_alpha()
-            surface.set_alpha(255)
             surface.blit(B.image,crop_rect)
-            window.Window.get_screen().blit(surface, (B.x, B.y))
 
             if unbounded_collision.UnboundedCollision.pixel_collision(B.rect, nave.rect, surface, nave.image):
                 lista.pop(lista.index(B))

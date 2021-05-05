@@ -153,12 +153,8 @@ def fase2(pontos,vida):
                     astronaut[var_anda-1][index].move_y(-velY * janela.delta_time())
                     jump = False  
             
-
-
-            
-
+            # Movimentação do player e suas sprites
             if var_anda >= 1 and time_anda >= 0.1:
-
                 index += 1
                 time_anda = 0
                 if index > 5: index = 0    
@@ -184,7 +180,7 @@ def fase2(pontos,vida):
                 ## Perda de vida e fase é reiniciada
                 if Collision.collided_perfect(astronaut[var_anda-1][index],acid_draw) and evita_bug >=1:
                     vida -= 1
-                    #return 2, pontos, vida
+                    return 2, pontos, vida
 
             
             ## Plataforma
@@ -197,9 +193,6 @@ def fase2(pontos,vida):
             if lista_chao[-1].x < janela.width :
                 nave_fase2.set_position(lista_chao[-1].x + 120, 480)
                 nave_fase2.draw()
-
-            if not Collision.collided_perfect(nave_fase2,astronaut[var_anda-1][index]):
-                return 3, pontos, vida
 
             # Movimentação do chão
             for chao_draw in range(len(lista_chao)):
@@ -254,15 +247,14 @@ def fase2(pontos,vida):
 
 
             ## Gameover
-            if vida == 0 or time >= 60: # and not colided com nave no final
+            if vida == 0 or time >= 60: # e não colidiu com nave no final
                 som3.stop()
 
                 return -1, pontos, vida
 
             ## Proxima fase
-            # if colided com nave no final
-            #     return 3, pontos, vida
-            
+            if Collision.collided_perfect(nave_fase2,astronaut[var_anda-1][index]):
+                return 3, pontos, vida
 
             if evita_bug < 1:
                 evita_bug += janela.delta_time()
