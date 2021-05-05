@@ -17,8 +17,8 @@ def fase3(pontos,vida):
     fundo = Sprite("images/fase3/background3.png")
     fundo.set_position(0,0)
 
-    fundo2= Sprite("images/fase3/background3.png")
-    fundo2.set_position(1152,0)
+    fundo2 = Sprite("images/fase3/background3.png")
+    fundo2.set_position(fundo.width,0)
 
     pause_icon = Sprite("images/pause/pause_icon.png")
     pause_icon.set_position(1280-pause_icon.width-30,10)
@@ -78,18 +78,22 @@ def fase3(pontos,vida):
             fps_atual = fps
             cont,fps = 0, 0
 
+            if time  == 30 or time == 50:
+                inimigo += 1
+            
+
         ## Deslocamento de fundo
         vel_fundo = 0.5
 
-        if  fundo.x+fundo.width>=0:
+        if  fundo.x+fundo.width >= 0:
             fundo.move_x(-vel_fundo)  
         else:
-            fundo.set_position(1152,0)
+            fundo.set_position(fundo.width,0)
 
-        if  fundo2.x+fundo2.width>=0:
+        if  fundo2.x+fundo2.width >= 0:
             fundo2.move_x(-vel_fundo)  
         else:
-            fundo2.set_position(1152,0)
+            fundo2.set_position(fundo.width,0)
         
         ## Desenhando tela do jogo
         fundo.draw()
@@ -115,8 +119,6 @@ def fase3(pontos,vida):
         temp_inimigo_nave += janela.delta_time()
         time_tiro_enemy += janela.delta_time()
 
-        if time == 30 or time == 50:
-            inimigo += 1
 
         ## Setando tiros na tela
         lista_tiro,temp_tiro = nave_geral.tiro(janela,nave,lista_tiro,temp_tiro,vel_tiro)
@@ -142,6 +144,7 @@ def fase3(pontos,vida):
         ## Voltando para o menu
         if teclado.key_pressed("ESC"):
             return 0, pontos
+        
         ## Gameover
         if vida == 0:
             return -1, pontos

@@ -15,10 +15,8 @@ while True:
 
     if var_global == 0:
         var_global = menu_inicial()
-        
 
-    elif var_global == 1:
-
+    elif var_global == 1: 
         var_global = fases(var_global, vida)
 
     elif var_global == 2:

@@ -3,6 +3,8 @@ from PPlay.sprite import *
 from random import uniform
 from random import randint
 from PPlay.collision import *
+import unbounded_collision
+from pygame import Rect
 
 
 def movimentacao(janela,nave_sprite):
@@ -56,7 +58,7 @@ def tiro(janela,nave_sprite,lista,temp,vel_tiro):
 
 def inimigo(janela,lista_nave_inimigas,time,lista_tiro,pontos,time_tiro_enemy,lista,vel_tiro,nave,vida, i):
     if time >= 2:
-        nave_inimiga_sprite = Sprite(f"images/fase3/Ship{i}.png")
+        nave_inimiga_sprite = Sprite(f"images/fase3/Ship{i}.png", 1)
         nave_inimiga_sprite.set_position(1281+ randint(200,250),uniform(0,768- nave_inimiga_sprite.height-70))
         lista_nave_inimigas.append(nave_inimiga_sprite)
         time = 0
@@ -74,7 +76,11 @@ def inimigo(janela,lista_nave_inimigas,time,lista_tiro,pontos,time_tiro_enemy,li
 
         if lista_tiro:
             for B in lista_tiro:
-                if B.y > A.y- A.height-15 and B.y < A.y and B.x >= A.x-A.width/2 and B.x<A.x:
+                crop_rect = pygame.Rect((B.curr_frame * B.width,0),(B.width,B.height))
+                surface = pygame.Surface((B.width,B.height))
+                surface.blit(B.image,crop_rect)
+
+                if unbounded_collision.UnboundedCollision.pixel_collision(B.rect, A.rect, surface, A.image):
                     lista_nave_inimigas.pop(lista_nave_inimigas.index(A))
                     lista_tiro.pop(lista_tiro.index(B))
                     pontos += 1250
