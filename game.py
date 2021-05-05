@@ -54,7 +54,7 @@ def transicao(level):
                     return ini(janela, level)
                 if mouse.is_over_object(recusar):
                     return False
-        elif click > 4:
+        elif click > 10:
             # Depois de 4 segundos voltamos para o menu
             return 0
 

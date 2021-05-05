@@ -143,18 +143,17 @@ def fase3(pontos,vida):
 
         ## Voltando para o menu
         if teclado.key_pressed("ESC"):
-            return 0, pontos
+            return 0
         
         ## Gameover
         if vida == 0:
-            return -1, pontos
+            return -1
 
-        ## Proxima fase
+        ## Final
         if time >= 60:
             som2.pause()
             som2.stop()
-            
-            return 4, pontos
+            return 4
     
         som2.play()
 
@@ -181,14 +180,14 @@ def fase3(pontos,vida):
 
                 if mouse.is_over_object(sair_pause):
                     return 0, pontos
-                # if mouse.is_over_object(music_on_pause) and som.is_playing():
-                #     som.pause()
-                #     pausa_som = False
-                # if mouse.is_over_object(music_on_pause) and not som.is_playing():
-                #     som.unpause()
-                #     som.play()
+                if mouse.is_over_object(music_on_pause) and som2.is_playing():
+                    som2.pause()
+                    pausa_som = False
+                if mouse.is_over_object(music_on_pause) and not som2.is_playing():
+                    som2.unpause()
+                    som2.play()
 
-                #     pausa_som = True
+                    pausa_som = True
 
             
 
