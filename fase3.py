@@ -17,11 +17,11 @@ def fase3(pontos,vida):
     fundos = []
     tam = pygame.image.load("images/fase3/background3.png").get_rect().width
     x = 0
-    while(x <= 2 * window.width):
-        x += tam
-        fundo = GameImage("images/fase3/background3.png")
+    while x*tam <= 2 * janela.width:
+        fundo = Sprite("images/fase3/background3.png")
         fundo.set_position(tam * x, 0)
         fundos.append(fundo)
+        x += 1
 
     pause_icon = Sprite("images/pause/pause_icon.png")
     pause_icon.set_position(1280-pause_icon.width-30,10)
@@ -86,16 +86,15 @@ def fase3(pontos,vida):
             
 
         ## Deslocamento de fundo
-        vel_fundo = 0.5
+        vel_fundo = 1
         for fundo in fundos:
+            fundo.draw()
             if fundo.x + fundo.width >= 0:
                 fundo.move_x(-vel_fundo)
             else:
-                fundo.x = tam * len(fundos)
+                fundo.x = tam * (len(fundos)-1)
         
         ## Desenhando tela do jogo
-        fundo.draw()
-        fundo2.draw()
         pause_icon.draw()
         janela.draw_text(f"Tempo 00:{60-time}", 450, 20, size=45, color=(240,240,240), font_name="Computer_says_no")
         janela.draw_text(f"Pontos {int(pontos)}", 650, 20, size=45, color=(240,240,240), font_name="Computer_says_no")
