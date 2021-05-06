@@ -122,7 +122,9 @@ def fase3(pontos,vida):
 
         lista_nave_inimigas,temp_tiro,lista_tiro,pontos, time_tiro_enemy,lista,vida = nave_geral.inimigo(janela,lista_nave_inimigas,temp_tiro,lista_tiro,pontos,time_tiro_enemy,lista,vel_tiro,nave,vida, inimigo)
 
-        lista, vida, time_tiro_enemy = colisaofase3.tiro_inimigo(janela,lista_nave_inimigas,time_tiro_enemy,lista,vel_tiro,nave,vida, inimigo)
+        lista, vida, time_tiro_enemy = colisaofase3.tiro_inimigo(lista_nave_inimigas,time_tiro_enemy,lista,vel_tiro,nave,vida, inimigo)
+        
+        lista_nave_inimigas, vida = colisaofase3.player_nave_inimigas(nave, lista_nave_inimigas,vida)
 
         for shot in lista:
             shot.update()

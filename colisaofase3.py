@@ -7,7 +7,7 @@ import unbounded_collision
 from pygame import Rect
 
 
-def tiro_inimigo(janela,lista_nave_inimigas,time_tiro_enemy,lista,vel_tiro,nave,vida, i):
+def tiro_inimigo(lista_nave_inimigas,time_tiro_enemy,lista,vel_tiro,nave,vida, i):
     
     if time_tiro_enemy >= 1:
         for A in lista_nave_inimigas:
@@ -28,3 +28,14 @@ def tiro_inimigo(janela,lista_nave_inimigas,time_tiro_enemy,lista,vel_tiro,nave,
                 vida -= 1
             
     return lista, vida, time_tiro_enemy
+
+def player_nave_inimigas(nave, lista_nave_inimigas,vida):
+
+    while True:
+        if  lista_nave_inimigas:
+            for A in  lista_nave_inimigas:
+                if Collision.collided_perfect(A,nave):
+                        lista_nave_inimigas.pop( lista_nave_inimigas.index(A))
+                        vida -= 1
+
+        return  lista_nave_inimigas, vida
