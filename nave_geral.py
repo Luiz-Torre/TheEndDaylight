@@ -38,7 +38,7 @@ def tiro(janela,nave_sprite,lista,temp,vel_tiro):
 
     while True:
 
-        if teclado.key_pressed("SPACE") and temp > 0.5:
+        if teclado.key_pressed("SPACE") and temp > 0.4:
 
             tiro  = Sprite("images/fase1/shot.png",5)
             tiro.set_position(nave_sprite.x + 60, nave_sprite.y - 28)
