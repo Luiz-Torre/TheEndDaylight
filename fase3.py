@@ -152,7 +152,7 @@ def fase3(pontos,vida):
             return -1
 
         ## Final
-        if time >= 60:
+        if time >= 30:
             som2.pause()
             som2.stop()
             return 4
