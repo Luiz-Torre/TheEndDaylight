@@ -9,7 +9,7 @@ from pygame import Rect
 
 def tiro_inimigo(lista_nave_inimigas,time_tiro_enemy,lista,vel_tiro,nave,vida, i):
     
-    if time_tiro_enemy >= 1.5:
+    if time_tiro_enemy >= 2:
         for A in lista_nave_inimigas:
             tiro  = Sprite(f"images/fase3/shot{i}A.png",5)
             tiro.set_position(A.x -140, A.y-42)
@@ -22,7 +22,7 @@ def tiro_inimigo(lista_nave_inimigas,time_tiro_enemy,lista,vel_tiro,nave,vida, i
             if B.x < 0:
                 lista.pop(lista.index(B))
 
-            if B.x <= nave.x and B.y+ B.height/2 > nave.y and B.y - B.height/2  < nave.y + nave.height:
+            if B.x <= nave.x and B.y+ B.height/2 > nave.y and B.y - B.height/2  < nave.y + nave.height and lista != []:
                 lista.pop(lista.index(B))
                 vida -= 1
             

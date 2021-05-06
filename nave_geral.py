@@ -77,7 +77,7 @@ def inimigo(janela,lista_nave_inimigas,time,lista_tiro,pontos,time_tiro_enemy,li
         if lista_tiro:
             for B in lista_tiro:
                 for A in lista_nave_inimigas:
-                    if B.x >= A.x and B.y+ B.height/2 > A.y and B.y - B.height/2  < A.y + A.height:
+                    if B.x >= A.x - A.width/2 and B.y+ B.height/2 > A.y and B.y - B.height/2  < A.y + A.height:
                         lista_nave_inimigas.pop(lista_nave_inimigas.index(A))
                         lista_tiro.pop(lista_tiro.index(B))
                         pontos += 1200 + 50*i
