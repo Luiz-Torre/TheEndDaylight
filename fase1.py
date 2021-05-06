@@ -149,7 +149,7 @@ def fase1():
             return -1, pontos
 
         ## Proxima fase
-        if time >= 60:
+        if time >= 0:
             som2.pause()
             som2.stop()
             

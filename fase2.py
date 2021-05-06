@@ -44,10 +44,8 @@ def fase2(pontos,vida):
         vida_list.append(vida_img)
 
     lista_chao, lista_acid, matriz_obs, lista_det, nave_fase2 = criando_mapa_fase2.criar(janela)
-    time = 0
-    cont = 0
-    fps = 0
-    fps_atual = 0
+    lista_det.pop(0)
+    time, cont, fps, fps_atual = 0, 0, 0, 0
     var = 1
     VelX= 90
     velY = 300
