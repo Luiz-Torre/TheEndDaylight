@@ -28,7 +28,7 @@ def fase1():
 
 
     som2 = Sound("sounds/Back to the Future with composer Alan Silvestri conducting in Vienna!_160k.ogg")
-    som2.set_volume(80)
+    som2.set_volume(40)
 
 
     nave = Sprite("images/fase1/ship.gif")
@@ -149,7 +149,7 @@ def fase1():
             return -1, pontos
 
         ## Proxima fase
-        if time >= 0:
+        if time >= 60:
             som2.pause()
             som2.stop()
             

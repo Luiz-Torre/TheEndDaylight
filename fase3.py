@@ -28,7 +28,7 @@ def fase3(pontos,vida):
 
 
     som2 = Sound("sounds/Back to the Future with composer Alan Silvestri conducting in Vienna!_160k.ogg")
-    som2.set_volume(80)
+    som2.set_volume(40)
 
 
     nave = Sprite("images/fase3/nave.png")
