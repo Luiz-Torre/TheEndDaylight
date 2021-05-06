@@ -19,6 +19,9 @@ def tiro_inimigo(lista_nave_inimigas,time_tiro_enemy,lista,vel_tiro,nave,vida, i
     
     if lista:
         for B in lista:
+            if B.x < 0:
+                lista.pop(lista.index(B))
+
             crop_rect = pygame.Rect((B.curr_frame * B.width,0),(B.width,B.height))
             surface = pygame.Surface((B.width,B.height))
             surface.blit(B.image,crop_rect)

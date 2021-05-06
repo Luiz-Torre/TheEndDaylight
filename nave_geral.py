@@ -65,8 +65,8 @@ def inimigo(janela,lista_nave_inimigas,time,lista_tiro,pontos,time_tiro_enemy,li
 
 
     for A in lista_nave_inimigas:
-        if A.x > -100:
-            vel = 230*janela.delta_time()
+        if A.x > 0:
+            vel = 250*janela.delta_time()
             A.move_x(-vel)
 
             A.draw()

@@ -64,7 +64,7 @@ def criar(janela):
             
                 matriz_obs.append(lista_obs)
 #
-            if var_cria == 3 or var_cria == 1 and i!= 1:
+            if var_cria == 3 or var_cria == 1 and i!= 2:
                 valor = uniform(108*i+30,(108*(i+1)-50))
                 det = Sprite(f"images/fase2/det2.png")
                 det.set_position(valor, janela.height - chao.height-60)

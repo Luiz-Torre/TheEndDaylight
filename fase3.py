@@ -126,6 +126,7 @@ def fase3(pontos,vida):
         
         lista_nave_inimigas, vida = colisaofase3.player_nave_inimigas(nave, lista_nave_inimigas,vida)
 
+        print(lista_nave_inimigas)
         for shot in lista:
             shot.update()
             shot.draw()
