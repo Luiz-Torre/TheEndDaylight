@@ -163,7 +163,7 @@ def fase3(pontos,vida):
         while var == 0:
                 
             fundo.draw()
-            fundo2.draw()
+            # fundo2.draw()
             nave.draw()
             fundo_pause.draw()
             continuar_pause.draw()

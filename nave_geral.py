@@ -57,7 +57,7 @@ def tiro(janela,nave_sprite,lista,temp,vel_tiro):
         return lista,temp
 
 def inimigo(janela,lista_nave_inimigas,time,lista_tiro,pontos,time_tiro_enemy,lista,vel_tiro,nave,vida, i):
-    if time >= 2:
+    if time >= 1.7:
         nave_inimiga_sprite = Sprite(f"images/fase3/Ship{i}.png", 1)
         nave_inimiga_sprite.set_position(1281+ randint(200,250),uniform(0,768- nave_inimiga_sprite.height-70))
         lista_nave_inimigas.append(nave_inimiga_sprite)
@@ -65,7 +65,7 @@ def inimigo(janela,lista_nave_inimigas,time,lista_tiro,pontos,time_tiro_enemy,li
 
 
     for A in lista_nave_inimigas:
-        if A.x > 0:
+        if A.x >= 0- A.width:
             vel = 250*janela.delta_time()
             A.move_x(-vel)
 

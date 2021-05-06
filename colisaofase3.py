@@ -12,7 +12,7 @@ def tiro_inimigo(lista_nave_inimigas,time_tiro_enemy,lista,vel_tiro,nave,vida, i
     if time_tiro_enemy >= 2:
         for A in lista_nave_inimigas:
             tiro  = Sprite(f"images/fase3/shot{i}A.png",5)
-            tiro.set_position(A.x -140, A.y-42)
+            tiro.set_position(A.x -140, A.y + A.height/5)
             tiro.set_total_duration(2000)
             lista.append(tiro)
         time_tiro_enemy = 0
