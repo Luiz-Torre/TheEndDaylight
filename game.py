@@ -69,7 +69,7 @@ def transicao(level):
         janela.update()
 
 def fases(var,vida=1):
-    var, pontos = 1, 0
+    var, pontos = 3, 0
     while True:
         
         #Fase 1
