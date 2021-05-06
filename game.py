@@ -34,6 +34,8 @@ def transicao(level):
 
     aceitar.set_position(750, 608), recusar.set_position(350, 600)
     click = 0
+    time = 0
+
 
     if level == 1: 
         return ini(janela, level)
@@ -45,23 +47,29 @@ def transicao(level):
         fundo.draw()
         click += janela.delta_time()
 
+        if click > 1:
+            time += 1
+            click =  0
         if level < 4:
             aceitar.draw()
             recusar.draw()
 
-            if click > 1 and mouse.is_button_pressed(1): 
+            if time > 1 and mouse.is_button_pressed(1): 
                 if mouse.is_over_object(aceitar):
                     return ini(janela, level)
                 if mouse.is_over_object(recusar):
                     return False
-        elif click > 10:
-            # Depois de 4 segundos voltamos para o menu
+
+       
+        
+        elif time > 5:
+        # Depois de 4 segundos voltamos para o menu
             return 0
 
         janela.update()
 
 def fases(var,vida=1):
-    var, pontos = 3, 0
+    var, pontos = 1, 0
     while True:
         
         #Fase 1

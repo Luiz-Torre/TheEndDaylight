@@ -99,7 +99,7 @@ def fase3(pontos,vida):
         janela.draw_text(f"Tempo 00:{60-time}", 450, 20, size=45, color=(240,240,240), font_name="Computer_says_no")
         janela.draw_text(f"Pontos {int(pontos)}", 650, 20, size=45, color=(240,240,240), font_name="Computer_says_no")
         janela.draw_text(f"Fps: {fps_atual}", 250, 20, size=30, color=(240,240,240), font_name="Computer_says_no", italic=True)
-        nave.draw() 
+        nave.draw()
 
         ## Pausa
         if mouse.is_button_pressed(1) and mouse.is_over_object(pause_icon): 

@@ -22,11 +22,7 @@ def tiro_inimigo(lista_nave_inimigas,time_tiro_enemy,lista,vel_tiro,nave,vida, i
             if B.x < 0:
                 lista.pop(lista.index(B))
 
-            crop_rect = pygame.Rect((B.curr_frame * B.width,0),(B.width,B.height))
-            surface = pygame.Surface((B.width,B.height))
-            surface.blit(B.image,crop_rect)
-
-            if unbounded_collision.UnboundedCollision.pixel_collision(B.rect, nave.rect, surface, nave.image):
+            if B.x <= nave.x and B.y+ B.height/2 > nave.y and B.y - B.height/2  < nave.y + nave.height:
                 lista.pop(lista.index(B))
                 vida -= 1
             
