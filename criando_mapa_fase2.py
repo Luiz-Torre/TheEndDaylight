@@ -19,7 +19,7 @@ def criar(janela):
     r = 0
 
     acid = Sprite("images/fase2/small_acid.png")
-    acid.set_position(108*i,janela.height - chao.height+25)
+    acid.set_position(108*i,janela.height - chao.height+35)
     lista_acid.append(acid)
     while i < 74:
         lista_obs = []
@@ -33,7 +33,7 @@ def criar(janela):
         
             matriz_obs.append(lista_obs)
             acid = Sprite("images/fase2/big_acid.png")
-            acid.set_position(108*i,janela.height - chao.height+25)
+            acid.set_position(108*i,janela.height - chao.height+35)
             lista_acid.append(acid)
             r = i
             i += 4
@@ -47,7 +47,7 @@ def criar(janela):
         
             matriz_obs.append(lista_obs)
             acid = Sprite("images/fase2/small_acid.png")
-            acid.set_position(108*i,janela.height - chao.height+25)
+            acid.set_position(108*i,janela.height - chao.height+35)
             lista_acid.append(acid)
             r = i
 
