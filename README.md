@@ -1,3 +1,1 @@
-Imagens utilizadas não necessariamente condizem com o produto final. 
-Alterações podem ocorrer.
-Analisar essas trocas.
+# Jogo criado para a matéria "Laboratório de Desenvolvimento de Games" utilizando python( pygames e PPplay)
